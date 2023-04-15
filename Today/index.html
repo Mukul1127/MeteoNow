@@ -1,0 +1,247 @@
+<!--
+This file is part of MetroWeather.
+
+MetroWeather is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+MetroWeather is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with MetroWeather. If not, see
+<https://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MetroWeather</title>
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="Today.ts"></script>
+  </head>
+  <body class="antialiased bg-gray-100 dark:bg-gray-800">
+    <nav class="duration-200 ease-in-out bg-gray-700 dark:bg-gray-900">
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="/" class="flex items-center">
+          <img src="/favicon.svg" class="h-8 mr-3" alt="MetroWeather Logo" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">MetroWeather</span>&nbsp;&nbsp;&nbsp;
+          <span class="hidden lg:block self-center text-md font-semibold whitespace-nowrap text-gray-400">By Mukul Kedia</span>
+        </a>
+        <button data-collapse-toggle="navbar-default" type="button"
+          class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          aria-controls="navbar-default" aria-expanded="false">
+          <span class="sr-only">Open Main Menu</span>
+          <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </button>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+          <ul
+            class="font-medium grid justify-evenly grid-rows-2 grid-flow-col items-center md:p-0 mt-2 rounded-lg md:flex md:flex-row md:space-x-8 md:mt-0">
+            <li>
+              <a href="#"
+                class="font-semibold text-gray-400 hover:dark:bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-gray-700 rounded-lg text-sm p-2.5"
+                aria-current="page">Today's Weather</a>
+            </li>
+            <li>
+              <a href="/Future/" class="font-semibold text-gray-400 hover:dark:bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-gray-700 rounded-lg text-sm p-2.5">The Future's Weather</a>
+            </li>
+            <li class="w-6 h-6">
+              <a href="//github.com/Mukul1127/MetroWeather" class="w-6 h-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="w-6 h-6 absolute fill-gray-400">
+                  <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
+                </svg>
+              </a>
+            </li>
+            &nbsp;
+            <li>
+              <button data-modal-target="modal" data-modal-toggle="modal"
+                class="text-gray-500 dark:text-gray-400 hover:dark:bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-gray-700 rounded-lg text-sm p-2.5"
+                type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                  class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </button>
+            </li>
+            <li>
+              <button id="theme-toggle" type="button"
+                class="text-gray-500 dark:text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                <svg id="dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                <svg id="light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                    fill-rule="evenodd" clip-rule="evenodd"></path>
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="content" class="hidden md:flex md:justify-between">
+      <div class="bg-gray-100 dark:bg-gray-800 w-fit h-fit p-10 m-10 rounded-lg">
+        <h1 id="content" class="text-black dark:text-white font-semibold text-3xl">Current Weather</h1>
+        <h1 id="temperature" class="text-gray-700 dark:text-gray-400 font-semibold text-xl"></h1>
+        <h1 id="wind" class="text-gray-700 dark:text-gray-400 font-semibold text-xl"></h1>
+        <h1 id="winddirection" class="text-gray-700 dark:text-gray-400 font-semibold text-xl"></h1>
+      </div>
+      <div class="hidden lg:block bg-gray-100 dark:bg-gray-800 w-fit h-fit p-10 m-10 rounded-lg">
+        <h1 id="content" class="text-black dark:text-white font-semibold text-3xl">Today's Weather</h1>
+        <canvas id="chart" class="h-72 pt-2" aria-label="Data Chart" role="img"></canvas>
+      </div>
+    </div>
+
+    <div id="loader" class="grid h-screen w-screen place-items-center place-content-center absolute top-0 -z-10">
+      <div role="status">
+        <svg aria-hidden="true" class="w-40 h-40 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+          <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+        </svg>
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+    <footer class="duration-200 ease-in-out shadow bg-gray-700 dark:bg-gray-900 absolute inset-x-0 bottom-0">
+      <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+        <div class="sm:flex sm:items-center sm:justify-between">
+          <a href="#" class="flex items-center mb-4 sm:mb-0">
+            <img src="/favicon.svg" class="h-8 mr-3" alt="MetroWeather Logo" />
+            <div class="self-center text-2xl font-semibold whitespace-nowrap text-white">MetroWeather</div>
+          </a>
+          <ul id="list" class="flex flex-wrap items-center mb-6 text-sm font-medium sm:mb-0 text-gray-400">
+            <li>
+              <a href="//choosealicense.com/licenses/agpl" class="lg:hidden mr-4 md:mr-6 ">© Mukul Kedia</a>
+              <a href="//choosealicense.com/licenses/agpl" class="hidden lg:block mr-4 md:mr-6 ">Copyright © 2023 Mukul Kedia</a>
+            </li>
+            <li>
+              <a href="//open-meteo.com" class="lg:hidden mr-4 md:mr-6">Open-Meteo.com</a>
+              <a href="//open-meteo.com" class="hidden lg:block mr-4 md:mr-6">Weather data by Open-Meteo.com</a>
+            </li>
+            <li>
+              <a href="//flowbite.com" class="lg:hidden mr-4 md:mr-6 ">Flowbite</a>
+              <a href="//flowbite.com" class="hidden lg:block mr-4 md:mr-6 ">Components by Flowbite</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <div id="modal" tabindex="-1" aria-hidden="true"
+      class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+      <div class="relative w-full h-full max-w-2xl md:h-auto">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-900">
+          <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Settings</h3>
+            <button type="button"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              data-modal-hide="modal">
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd">
+                </path>
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <div class="p-6 space-y-6">
+            <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">Temperature Units</h3>
+            <ul class="grid w-full gap-6 md:grid-cols-2">
+              <li>
+                <input type="radio" id="fahrenheit" name="temp" value="fahrenheit" class="hidden peer" required>
+                <label for="fahrenheit"
+                  class="inline-flex items-center justify-between w-full p-5 text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-purple-600 peer-checked:to-blue-500 hover:text-gray-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700">
+                  <div class="block">
+                    <div class="w-full text-lg font-semibold">Fahrenheit</div>
+                    <div class="w-full">The Good ol' Imperial System.</div>
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="celsius" name="temp" value="celsius" class="hidden peer">
+                <label for="celsius"
+                  class="inline-flex items-center justify-between w-full p-5 text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-purple-600 peer-checked:to-blue-500 hover:text-gray-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700">
+                  <div class="block">
+                    <div class="w-full text-lg font-semibold">Celsius</div>
+                    <div class="w-full">Metric? Why Another.</div>
+                  </div>
+                </label>
+              </li>
+            </ul>
+    
+            <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">Windspeed Units</h3>
+            <ul class="grid w-full gap-6 md:grid-cols-2">
+              <li>
+                <input type="radio" id="mph" name="wind" value="mph" class="hidden peer">
+                <label for="mph"
+                  class="inline-flex items-center justify-between w-full p-5 text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-purple-600 peer-checked:to-blue-500 hover:text-gray-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700">
+                  <div class="block">
+                    <div class="w-full text-lg font-semibold">MPH</div>
+                    <div class="w-full">Good ol' Miles Per Hour.</div>
+                  </div>
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="kmh" name="wind" value="kmh" class="hidden peer" required>
+                <label for="kmh"
+                  class="inline-flex items-center justify-between w-full p-5 text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-purple-600 peer-checked:to-blue-500 hover:text-gray-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700">
+                  <div class="block">
+                    <div class="w-full text-lg font-semibold">KMH</div>
+                    <div class="w-full">The Canadian System? Still Good.</div>
+                </label>
+              </li>
+            </ul>
+    
+            <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">Precipitation Units</h3>
+            <ul class="grid w-full gap-6 md:grid-cols-2">
+              <li>
+                <input type="radio" id="inch" name="precip" value="inch" class="hidden peer" required>
+                <label for="inch"
+                  class="inline-flex items-center justify-between w-full p-5 text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-purple-600 peer-checked:to-blue-500 hover:text-gray-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700">
+                  <div class="block">
+                    <div class="w-full text-lg font-semibold">Inches</div>
+                    <div class="w-full">+1 Imperial System Point.</div>
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="mm" name="precip" value="mm" class="hidden peer">
+                <label for="mm"
+                  class="inline-flex items-center justify-between w-full p-5 text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-purple-600 peer-checked:to-blue-500 hover:text-gray-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700">
+                  <div class="block">
+                    <div class="w-full text-lg font-semibold">Milimetters</div>
+                    <div class="w-full">This One's Actually Good.</div>
+                  </div>
+                </label>
+              </li>
+            </ul>
+          </div>
+          <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+            <button id="done" data-modal-hide="modal" type="button"
+              class="shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white">
+              <span
+                class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-800 rounded-md group-hover:bg-opacity-0">Done</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
