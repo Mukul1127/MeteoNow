@@ -25,6 +25,8 @@ Chart.defaults.elements.line.borderWidth = 1;
 Chart.defaults.elements.line.normalized = true;
 Chart.defaults.elements.line.spanGaps = true;
 
+let chart: Chart;
+
 function callCurrentAPI() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(pos => {
@@ -127,7 +129,7 @@ async function getCurrentWeather(settings: {
   document.body.style.background = `url(${BGImage}) no-repeat center center fixed`;
   document.body.style.backgroundSize = "cover";
 
-  new Chart(
+  if (!chart) chart = new Chart(
     document.getElementById("chart")! as HTMLCanvasElement, {
       type: "line",
       data: {
@@ -222,6 +224,23 @@ async function getCurrentWeather(settings: {
       }
     }
   )
+  chart.data.datasets[0].label = `Temperature in ${data.hourly_units.temperature_2m}`;
+  chart.data.datasets[0].data = data.hourly.temperature_2m.slice(0, 24)
+  chart.data.datasets[1].label = `Relative Humidity in ${data.hourly_units.relativehumidity_2m}`;
+  chart.data.datasets[1].data = data.hourly.relativehumidity_2m.slice(0, 24)
+  chart.data.datasets[2].label = `Feels Like in ${data.hourly_units.apparent_temperature}`;
+  chart.data.datasets[2].data = data.hourly.apparent_temperature.slice(0, 24)
+  chart.data.datasets[3].label = `Wind Speed in ${data.hourly_units.windspeed_10m}`;
+  chart.data.datasets[3].data = data.hourly.windspeed_10m.slice(0, 24)
+  chart.data.datasets[4].label = `Precipitation in ${data.hourly_units.precipitation}`;
+  chart.data.datasets[4].data = data.hourly.precipitation.slice(0, 24)
+  chart.data.datasets[5].label = `Snowfall in ${data.hourly_units.snowfall}`;
+  chart.data.datasets[5].data = data.hourly.snowfall.slice(0, 24)
+  chart.data.datasets[6].label = `Precipitation Probability in ${data.hourly_units.precipitation_probability}`;
+  chart.data.datasets[6].data = data.hourly.precipitation_probability.slice(0, 24)
+  chart.data.datasets[7].label = `Snow Depth in ${data.hourly_units.snow_depth}`;
+  chart.data.datasets[7].data = data.hourly.snow_depth.slice(0, 24)
+  chart.update();
 
   document.getElementById("loader").classList.add("hidden");
   document.getElementById("content")?.classList.remove("hidden");
