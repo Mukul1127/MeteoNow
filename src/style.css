@@ -14,9 +14,11 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with MetroWeather. If not, see
 <https://www.gnu.org/licenses/>.
+
+© 2022-2023 Copyright: Open-Meteo.com
 */
 
-@import "@fontsource/inter/variable.css";
+@import "/Font/inter.css";
 
 @tailwind base;
 @tailwind components;
@@ -26,4 +28,13 @@ along with MetroWeather. If not, see
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   text-size-adjust: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: "InterVar", sans-serif;
+    font-optical-sizing: auto;
+    font-feature-settings: "ss01", "cv05";
+  }
 }

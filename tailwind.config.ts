@@ -14,13 +14,18 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with MetroWeather. If not, see
 <https://www.gnu.org/licenses/>.
+
+© 2022-2023 Copyright: Open-Meteo.com
 */
 
 import type { Config } from "tailwindcss"
 
 export default {
   darkMode: "class",
-  theme: { extend: { fontFamily: { sans: ["InterVariable", "sans-serif"] } } },
+  theme: { fontFamily: { sans: [
+    "Inter", "sans-serif",
+    "InterVar", "sans-serif",
+  ] } },
   content: ["./index.html", "./Today/index.html", "./Future/index.html", "./src/**/*.{js,ts,jsx,tsx}", "./Today/Today.ts", "./Future/Future.ts"],
   plugins: [import("flowbite/plugin")]
 } satisfies Config
