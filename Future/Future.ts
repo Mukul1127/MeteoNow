@@ -15,12 +15,12 @@ You should have received a copy of the GNU Affero General Public License
 along with MetroWeather. If not, see
 <https://www.gnu.org/licenses/>.
 
-© 2022-2023 Copyright: Open-Meteo.com
+Copyright © 2022-2023 Open-Meteo.com
 */
 
 import Chart from "chart.js/auto"
 
-Chart.defaults.font.family = "InterVar";
+Chart.defaults.font.family = "Inter";
 Chart.defaults.font.size = 10;
 Chart.defaults.font.weight = "bold";
 Chart.defaults.elements.line.borderWidth = 1;

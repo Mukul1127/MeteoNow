@@ -15,7 +15,7 @@ You should have received a copy of the GNU Affero General Public License
 along with MetroWeather. If not, see
 <https://www.gnu.org/licenses/>.
 
-© 2022-2023 Copyright: Open-Meteo.com
+Copyright © 2022-2023 Open-Meteo.com
 */
 
 import "flowbite";

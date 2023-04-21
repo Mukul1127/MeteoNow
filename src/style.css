@@ -15,10 +15,27 @@ You should have received a copy of the GNU Affero General Public License
 along with MetroWeather. If not, see
 <https://www.gnu.org/licenses/>.
 
-© 2022-2023 Copyright: Open-Meteo.com
+Copyright © 2022-2023 Open-Meteo.com
 */
 
-@import "/Font/inter.css";
+@font-face {
+  font-family: "Inter";
+  font-weight: 100 900;
+  font-display: block;
+  font-style: normal;
+  src: url("/Inter.woff2") format("woff2-variations"),
+    url("/Inter.woff2") format("woff2");
+  src: url("/Inter.woff2") format("woff2") tech("variations");
+}
+@font-face {
+  font-family: "Inter";
+  font-weight: 100 900;
+  font-display: block;
+  font-style: italic;
+  src: url("/Inter-Italic.woff2") format("woff2-variations"),
+    url("/Inter-Italic.woff2") format("woff2");
+  src: url("/Inter-Italic.woff2") format("woff2") tech("variations");
+}
 
 @tailwind base;
 @tailwind components;
@@ -29,12 +46,16 @@ along with MetroWeather. If not, see
   text-rendering: optimizeLegibility;
   text-size-adjust: 100%;
   font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-feature-settings: "ss01", "cv05";
 }
 
-@supports (font-variation-settings: normal) {
-  :root {
-    font-family: "InterVar", sans-serif;
-    font-optical-sizing: auto;
-    font-feature-settings: "ss01", "cv05";
+@media (min-height: 600px) {
+  #logo {
+    width: 14rem;
+    height: 14rem;
+  }
+  #main {
+    display: block;
   }
 }
