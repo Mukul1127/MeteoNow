@@ -21,20 +21,14 @@ Copyright © 2022-2023 Open-Meteo.com
 @font-face {
   font-family: "Inter";
   font-weight: 100 900;
-  font-display: block;
+  font-display: swap;
   font-style: normal;
   src: url("/Inter.woff2") format("woff2-variations"),
-    url("/Inter.woff2") format("woff2");
-  src: url("/Inter.woff2") format("woff2") tech("variations");
-}
-@font-face {
-  font-family: "Inter";
-  font-weight: 100 900;
-  font-display: block;
-  font-style: italic;
-  src: url("/Inter-Italic.woff2") format("woff2-variations"),
-    url("/Inter-Italic.woff2") format("woff2");
-  src: url("/Inter-Italic.woff2") format("woff2") tech("variations");
+    url("/Inter.woff2") format("woff2"),
+    url("/Inter.woff2") format("woff2") tech("variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
 
 @tailwind base;
@@ -47,7 +41,7 @@ Copyright © 2022-2023 Open-Meteo.com
   text-size-adjust: 100%;
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
-  font-feature-settings: "ss01", "cv05";
+  font-feature-settings: "ss01", "cv05", "ss03";
 }
 
 @media (min-height: 600px) {

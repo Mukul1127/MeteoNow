@@ -18,7 +18,8 @@ along with MetroWeather. If not, see
 Copyright © 2022-2023 Open-Meteo.com
 */
 
-import Chart from "chart.js/auto"
+import Chart from "chart.js/auto";
+import { Modal } from "flowbite";
 
 Chart.defaults.font.family = "Inter";
 Chart.defaults.font.size = 10;
@@ -26,19 +27,24 @@ Chart.defaults.font.weight = "bold";
 Chart.defaults.elements.line.borderWidth = 1;
 Chart.defaults.elements.line.normalized = true;
 Chart.defaults.elements.line.spanGaps = true;
+Chart.defaults.elements.line.tension = 0.4;
+Chart.defaults.elements.point.radius = 2.5;
+
+if (localStorage.getItem("dontever") == null) localStorage.setItem("dontever", "false");
 
 let chart: Chart;
+const modal = new Modal(document.getElementById("location")!);
 
 function callCurrentAPI() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(pos => {
-      getCurrentWeather({
-        temperatureUnit: localStorage.getItem("temp")!,
-        windSpeedUnit: localStorage.getItem("wind")!,
-        precipitationUnit: localStorage.getItem("precip")!
-      }, pos.coords.latitude, pos.coords.longitude);
-    });
-  }
+  if (!navigator.geolocation) return
+  if (localStorage.getItem("dontever") == "false") modal.show();
+  navigator.geolocation.getCurrentPosition(pos => {
+    getCurrentWeather({
+      temperatureUnit: localStorage.getItem("temp")!,
+      windSpeedUnit: localStorage.getItem("wind")!,
+      precipitationUnit: localStorage.getItem("precip")!
+    }, pos.coords.latitude, pos.coords.longitude);
+  });
 }
 
 callCurrentAPI();
@@ -245,7 +251,14 @@ async function getCurrentWeather(settings: {
   chart.update();
 
   document.getElementById("loader").classList.add("hidden");
-  document.getElementById("content")?.classList.remove("hidden");
+  document.getElementById("content").classList.remove("hidden");
+  document.getElementById("content").classList.add("flex");
 }
 
-document.getElementById("done")?.addEventListener("click", () => callCurrentAPI());
+document.getElementById("done").addEventListener("click", () => callCurrentAPI());
+document.getElementsByClassName("close")[0].addEventListener("click", () => modal.hide());
+document.getElementsByClassName("close")[1].addEventListener("click", () => modal.hide());
+document.getElementById("dontever")?.addEventListener("click", () => {
+  localStorage.setItem("dontever", "true");
+  modal.hide();
+});

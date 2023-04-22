@@ -18,7 +18,7 @@ along with MetroWeather. If not, see
 Copyright © 2022-2023 Open-Meteo.com
 */
 
-import Chart from "chart.js/auto"
+import Chart from "chart.js/auto";
 
 Chart.defaults.font.family = "Inter";
 Chart.defaults.font.size = 10;
@@ -26,6 +26,10 @@ Chart.defaults.font.weight = "bold";
 Chart.defaults.elements.line.borderWidth = 1;
 Chart.defaults.elements.line.normalized = true;
 Chart.defaults.elements.line.spanGaps = true;
+Chart.defaults.elements.line.tension = 0.4;
+Chart.defaults.elements.point.radius = 2.5;
+
+if (localStorage.getItem("dontever") == null) localStorage.setItem("dontever", "false");
 
 const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const dayOfWeek = (new Date).getDay();
@@ -38,6 +42,7 @@ let day1: Chart,
   day6: Chart,
   day7: Chart,
   data: Object;
+const modal = new Modal(document.getElementById("location")!);
 
 class WeekChart {
   constructor(id: string, slice: Array<number>) {
@@ -152,15 +157,15 @@ class WeekChart {
 }
 
 function callWeekAPI() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(pos => {
-      getWeekWeather({
-        temperatureUnit: localStorage.getItem("temp")!,
-        windSpeedUnit: localStorage.getItem("wind")!,
-        precipitationUnit: localStorage.getItem("precip")!,
-      }, pos.coords.latitude, pos.coords.longitude);
-    });
-  }
+  if (!navigator.geolocation) return
+  if (localStorage.getItem("dontever") == "false") modal.show();
+  navigator.geolocation.getCurrentPosition(pos => {
+    getWeekWeather({
+      temperatureUnit: localStorage.getItem("temp")!,
+      windSpeedUnit: localStorage.getItem("wind")!,
+      precipitationUnit: localStorage.getItem("precip")!,
+    }, pos.coords.latitude, pos.coords.longitude);
+  });
 }
 
 callWeekAPI();
@@ -207,8 +212,8 @@ async function getWeekWeather(settings: {
   day6.update([120, 144]);
   day7.update([144, 168]);
 
-  document.getElementById("text1").innerHTML = daysOfWeek[dayOfWeek];
-  document.getElementById("text2").innerHTML = daysOfWeek[(dayOfWeek + 1) % 7];
+  document.getElementById("text1").innerHTML = `${daysOfWeek[dayOfWeek]} (Today)`;
+  document.getElementById("text2").innerHTML = `${daysOfWeek[(dayOfWeek + 1) % 7]} (Tomorrow)`;
   document.getElementById("text3").innerHTML = daysOfWeek[(dayOfWeek + 2) % 7];
   document.getElementById("text4").innerHTML = daysOfWeek[(dayOfWeek + 3) % 7];
   document.getElementById("text5").innerHTML = daysOfWeek[(dayOfWeek + 4) % 7];
@@ -220,3 +225,9 @@ async function getWeekWeather(settings: {
 }
 
 document.getElementById("done")?.addEventListener("click", () => callWeekAPI());
+document.getElementsByClassName("close")[0].addEventListener("click", () => modal.hide());
+document.getElementsByClassName("close")[1].addEventListener("click", () => modal.hide());
+document.getElementById("dontever")?.addEventListener("click", () => {
+  localStorage.setItem("dontever", "true");
+  modal.hide();
+});

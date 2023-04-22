@@ -30,9 +30,12 @@ if (
 ) {
   document.documentElement.classList.add("dark");
   lightIcon!.classList.remove("hidden");
+  lightIcon!.classList.remove("invisible");
 } else {
   document.documentElement.classList.remove("dark");
   darkIcon!.classList.remove("hidden");
+  lightIcon!.classList.remove("invisible");
+  lightIcon!.classList.add("hidden");
 }
 
 const themeToggleBtn = document.getElementById("theme-toggle");
