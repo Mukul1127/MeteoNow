@@ -22,7 +22,25 @@ import type { Config } from "tailwindcss"
 
 export default {
   darkMode: "class",
-  theme: { fontFamily: { sans: [ "Inter", "sans-serif"] } },
-  content: ["./index.html", "./Today/index.html", "./Future/index.html", "./src/**/*.{js,ts,jsx,tsx}", "./Today/Today.ts", "./Future/Future.ts"],
-  plugins: [import("flowbite/plugin")]
+  theme: {
+    fontFamily: {
+      "sans": [
+        "Inter, sans-serif", {
+          fontFeatureSettings: '"ss01", "cv05", "ss03"'
+        }
+      ]
+    }
+  },
+  content: [
+    "./index.html",
+    "./Today/index.html",
+    "./Future/index.html",
+    "./404.html",
+    "./src/*.ts",
+    "./Today/Today.ts",
+    "./Future/Future.ts"
+  ],
+  plugins: [
+    import("flowbite/plugin")
+  ]
 } satisfies Config
