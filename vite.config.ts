@@ -27,7 +27,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         Today: resolve(__dirname, "Today/index.html"),
-        Future: resolve(__dirname, "Future/index.html")
+        Future: resolve(__dirname, "Future/index.html"),
+        "404": resolve(__dirname, "404.html")
       }
     }
   }
