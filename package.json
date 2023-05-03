@@ -9,12 +9,12 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "cssnano": "^6.0.0",
-    "cssnano-preset-advanced": "^6.0.0",
+    "cssnano": "^6.0.1",
+    "cssnano-preset-advanced": "^6.0.1",
     "postcss": "^8.4.23",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.4",
-    "vite": "^4.3.3"
+    "vite": "^4.3.4"
   },
   "dependencies": {
     "chart.js": "^4.3.0",

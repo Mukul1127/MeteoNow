@@ -24,8 +24,8 @@ export default {
   darkMode: "class",
   theme: {
     fontFamily: {
-      "sans": [
-        "Inter, sans-serif", {
+      sans: [
+        "Inter", {
           fontFeatureSettings: '"ss01", "cv05", "ss03"'
         }
       ]
