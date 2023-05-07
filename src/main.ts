@@ -1,18 +1,18 @@
 /*
-This file is part of MetroWeather.
+This file is part of MeteoWeather.
 
-MetroWeather is free software: you can redistribute it and/or modify
+MeteoWeather is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-MetroWeather is distributed in the hope that it will be useful,
+MeteoWeather is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
-along with MetroWeather. If not, see
+along with MeteoWeather. If not, see
 <https://www.gnu.org/licenses/>.
 
 Copyright © 2022-2023 Open-Meteo.com
@@ -20,101 +20,128 @@ Copyright © 2022-2023 Open-Meteo.com
 
 import "flowbite";
 
-const darkIcon = document.getElementById("dark-icon");
-const lightIcon = document.getElementById("light-icon");
+const darkIconClasses = document.getElementById("dark-icon")?.classList;
+const lightIconClasses = document.getElementById("light-icon")?.classList;
+const classList = document.documentElement.classList;;
 
 if (
   localStorage.getItem("theme") === "dark" ||
   (!("theme" in localStorage) &&
     window.matchMedia("(prefers-color-scheme: dark)").matches)
 ) {
-  document.documentElement.classList.add("dark");
-  lightIcon!.classList.remove("hidden");
-  lightIcon!.classList.remove("invisible");
+  classList.add("dark");
+  lightIconClasses!.remove("hidden");
+  lightIconClasses!.remove("invisible");
 } else {
-  document.documentElement.classList.remove("dark");
-  darkIcon!.classList.remove("hidden");
-  lightIcon!.classList.remove("invisible");
-  lightIcon!.classList.add("hidden");
+  classList.remove("dark");
+  darkIconClasses!.remove("hidden");
+  lightIconClasses!.remove("invisible");
+  lightIconClasses!.add("hidden");
 }
 
-const themeToggleBtn = document.getElementById("theme-toggle");
+const themeToggleButton = document.getElementById("theme-toggle");
+const setDarkTheme = () => {
+  classList.add("dark");
+  localStorage.setItem("theme", "dark");
+  document.body.style.backgroundImage = `url("/backgroundDark.svg")`;
+}
+const setLightTheme = () => {
+  classList.remove("dark");
+  localStorage.setItem("theme", "light");
+  document.body.style.backgroundImage = `url("/backgroundLight.svg")`;
+}
 
-themeToggleBtn!.addEventListener("click", function () {
-  darkIcon!.classList.toggle("hidden");
-  lightIcon!.classList.toggle("hidden");
+window.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem("theme") === "dark") setDarkTheme();
+  else setLightTheme();
+});
 
-  if (localStorage.getItem("theme")) {
-    if (localStorage.getItem("theme") === "light") {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+themeToggleButton!.addEventListener("click", function () {
+  darkIconClasses!.toggle("hidden");
+  lightIconClasses!.toggle("hidden");
+
+  if (typeof (localStorage.getItem("theme")) == null) {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setDarkTheme();
     } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+      setLightTheme();
     }
+  }
+
+  if (localStorage.getItem("theme") == "light") {
+    setDarkTheme();
   } else {
-    if (document.documentElement.classList.contains("dark")) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    }
+    setLightTheme();
   }
 });
 
+const fahrenheitCheckBox = document.getElementById("fahrenheit") as HTMLInputElement;
+const celsiusCheckBox = document.getElementById("celsius") as HTMLInputElement;
+const mphCheckBox = document.getElementById("mph") as HTMLInputElement;
+const kmhCheckBox = document.getElementById("kmh") as HTMLInputElement;
+const inchCheckBox = document.getElementById("inch") as HTMLInputElement;
+const mmCheckBox = document.getElementById("mm") as HTMLInputElement;
+
 if (localStorage.getItem("temp")) {
-  if (localStorage.getItem("temp") === "fahrenheit") {
-    const fahrenheit = document.getElementById("fahrenheit") as HTMLInputElement;
-    fahrenheit.checked = true;
-  } else {
-    const celsius = document.getElementById("celsius") as HTMLInputElement;
-    celsius.checked = true;
-  }
+  if (localStorage.getItem("temp") === "fahrenheit") fahrenheitCheckBox.checked = true;
+  else celsiusCheckBox.checked = true;
 } else {
-  const fahrenheit = document.getElementById("fahrenheit") as HTMLInputElement;
-  fahrenheit.checked = true;
+  fahrenheitCheckBox.checked = true;
   localStorage.setItem("temp", "fahrenheit");
 }
 
 if (localStorage.getItem("wind")) {
-  if (localStorage.getItem("wind") === "mph") {
-    const mph = document.getElementById("mph") as HTMLInputElement;
-    mph.checked = true;
-  } else {
-    const kmh = document.getElementById("kmh") as HTMLInputElement;
-    kmh.checked = true;
-  }
+  if (localStorage.getItem("wind") === "mph") mphCheckBox.checked = true;
+  else kmhCheckBox.checked = true;
 } else {
-  const mph = document.getElementById("mph") as HTMLInputElement;
-  mph.checked = true;
+  mphCheckBox.checked = true;
   localStorage.setItem("wind", "mph");
 }
 
 if (localStorage.getItem("precip")) {
-  if (localStorage.getItem("precip") === "inch") {
-    const inch = document.getElementById("inch") as HTMLInputElement;
-    inch.checked = true;
-  } else {
-    const mm = document.getElementById("mm") as HTMLInputElement;
-    mm.checked = true;
-  }
+  if (localStorage.getItem("precip") === "inch") inchCheckBox.checked = true;
+  else mmCheckBox.checked = true;
 } else {
-  const inch = document.getElementById("inch") as HTMLInputElement;
-  inch.checked = true;
+  inchCheckBox.checked = true;
   localStorage.setItem("precip", "inch");
 }
 
-document.getElementById("done")?.addEventListener("click", () => {
-  const temp = <HTMLInputElement>document.querySelector('input[name="temp"]:checked'); 
-  if (temp) localStorage.setItem("temp", temp.value);
-  else localStorage.setItem("temp", "fahrenheit"); 
+const openButton = document.getElementById("open");
+const closeButton = document.getElementsByClassName("close");
+const saveButton = document.getElementById("done");
+const modal = document.getElementById("modal");
 
-  const wind = <HTMLInputElement>document.querySelector('input[name="wind"]:checked'); 
-  if (wind) localStorage.setItem("wind", wind.value);
+openButton?.addEventListener("click", () => {
+  modal.showModal();
+  modal?.classList.add("show");
+});
+
+for (const button of closeButton) {
+  button.addEventListener("click", () => {
+    if (localStorage.getItem("temp") == "fahrenheit") fahrenheitCheckBox.checked = true;
+    else celsiusCheckBox.checked = true;
+    if (localStorage.getItem("wind") == "mph") mphCheckBox.checked = true;
+    else kmhCheckBox.checked = true;
+    if (localStorage.getItem("precip") == "inch") inchCheckBox.checked = true;
+    else mmCheckBox.checked = true;
+    modal?.classList.remove("show");
+    modal.close();
+  })
+};
+
+document.getElementById("done")?.addEventListener("click", () => {
+  const temperature = <HTMLInputElement>document.querySelector('input[name="temp"]:checked');
+  if (typeof(temperature) != "undefined") localStorage.setItem("temp", temperature.value);
+  else localStorage.setItem("temp", "fahrenheit");
+
+  const windspeed = <HTMLInputElement>document.querySelector('input[name="wind"]:checked');
+  if (typeof(windspeed) != "undefined") localStorage.setItem("wind", windspeed.value);
   else localStorage.setItem("wind", "mph");
 
-  const precip = <HTMLInputElement>document.querySelector('input[name="precip"]:checked'); 
-  if (precip) localStorage.setItem("precip", precip.value);
+  const precipitation = <HTMLInputElement>document.querySelector('input[name="precip"]:checked');
+  if (typeof(precipitation) != "undefined") localStorage.setItem("precip", precipitation.value);
   else localStorage.setItem("precip", "inch");
-})
+
+  modal?.classList.remove("show");
+  modal.close();
+});
