@@ -107,16 +107,15 @@ if (localStorage.getItem("precip")) {
 }
 
 const openButton = document.getElementById("open");
-const closeButton = document.getElementsByClassName("close");
-const saveButton = document.getElementById("done");
-const modal = document.getElementById("modal");
+const closeButtons = Array.from(document.getElementsByClassName("close")) as Array<HTMLElement>;
+const modal = document.getElementById("modal") as HTMLDialogElement;
 
 openButton?.addEventListener("click", () => {
-  modal.showModal();
+  modal?.showModal();
   modal?.classList.add("show");
 });
 
-for (const button of closeButton) {
+closeButtons.forEach(button => {
   button.addEventListener("click", () => {
     if (localStorage.getItem("temp") == "fahrenheit") fahrenheitCheckBox.checked = true;
     else celsiusCheckBox.checked = true;
@@ -125,9 +124,9 @@ for (const button of closeButton) {
     if (localStorage.getItem("precip") == "inch") inchCheckBox.checked = true;
     else mmCheckBox.checked = true;
     modal?.classList.remove("show");
-    modal.close();
+    modal?.close();
   })
-};
+});
 
 document.getElementById("done")?.addEventListener("click", () => {
   const temperature = <HTMLInputElement>document.querySelector('input[name="temp"]:checked');
@@ -143,5 +142,5 @@ document.getElementById("done")?.addEventListener("click", () => {
   else localStorage.setItem("precip", "inch");
 
   modal?.classList.remove("show");
-  modal.close();
+  modal?.close();
 });
