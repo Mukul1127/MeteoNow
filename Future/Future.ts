@@ -42,7 +42,7 @@ let day1: Chart,
   day6: Chart,
   day7: Chart,
   data: Object;
-const modal = new Modal(document.getElementById("location")!);
+const modal = document.getElementById("modal2");
 
 class WeekChart {
   constructor(id: string, slice: Array<number>) {
@@ -158,7 +158,7 @@ class WeekChart {
 
 function callWeekAPI() {
   if (!navigator.geolocation) return
-  if (localStorage.getItem("dontever") == "false") modal.show();
+  if (localStorage.getItem("dontever") == "false") modal.showModal();
   navigator.geolocation.getCurrentPosition(pos => {
     getWeekWeather({
       temperatureUnit: localStorage.getItem("temp")!,
@@ -225,9 +225,8 @@ async function getWeekWeather(settings: {
 }
 
 document.getElementById("done")?.addEventListener("click", () => callWeekAPI());
-document.getElementsByClassName("close")[0].addEventListener("click", () => modal.hide());
-document.getElementsByClassName("close")[1].addEventListener("click", () => modal.hide());
-document.getElementById("dontever")?.addEventListener("click", () => {
+const closeButtons = Array.from(document.getElementsByClassName("close")) as Array<HTMLElement>;
+closeButtons.forEach(button => button.addEventListener("click", () => modal.close()));
+document.getElementById("done2")?.addEventListener("click", () => {
   localStorage.setItem("dontever", "true");
-  modal.hide();
 });

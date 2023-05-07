@@ -47,6 +47,9 @@ Copyright © 2022-2023 Open-Meteo.com
   #main {
     display: block;
   }
+  #texts {
+    align-items: center;
+  }
 }
 
 dialog[open] {
@@ -60,8 +63,5 @@ dialog::backdrop {
 @keyframes show {
   from {
     transform: translateY(5%);
-  }
-  to {
-    transform: translateY(0%);
   }
 }

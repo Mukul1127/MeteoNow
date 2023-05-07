@@ -33,11 +33,11 @@ Chart.defaults.elements.point.radius = 2.5;
 if (localStorage.getItem("dontever") == null) localStorage.setItem("dontever", "false");
 
 let chart: Chart;
-const modal = new Modal(document.getElementById("location")!);
+const modal = document.getElementById("modal2");
 
 function callCurrentAPI() {
   if (!navigator.geolocation) return
-  if (localStorage.getItem("dontever") == "false") modal.show();
+  if (localStorage.getItem("dontever") == "false") modal.showModal();
   navigator.geolocation.getCurrentPosition(pos => {
     getCurrentWeather({
       temperatureUnit: localStorage.getItem("temp")!,
@@ -255,10 +255,9 @@ async function getCurrentWeather(settings: {
   document.getElementById("content").classList.add("flex");
 }
 
-document.getElementById("done").addEventListener("click", () => callCurrentAPI());
-document.getElementsByClassName("close")[0].addEventListener("click", () => modal.hide());
-document.getElementsByClassName("close")[1].addEventListener("click", () => modal.hide());
-document.getElementById("dontever")?.addEventListener("click", () => {
+document.getElementById("done")?.addEventListener("click", () => callCurrentAPI());
+const closeButtons = Array.from(document.getElementsByClassName("close")) as Array<HTMLElement>;
+closeButtons.forEach(button => button.addEventListener("click", () => modal.close()));
+document.getElementById("done2")?.addEventListener("click", () => {
   localStorage.setItem("dontever", "true");
-  modal.hide();
 });
