@@ -33,7 +33,8 @@ Copyright © 2022-2023 Open-Meteo.com
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["vite/client"]
   },
   "include": ["src", "Week/Week.ts", "Current/Curent.ts"]
 }
