@@ -43,12 +43,12 @@ const themeToggleButton = document.getElementById("theme-toggle");
 const setDarkTheme = () => {
   classList.add("dark");
   localStorage.setItem("theme", "dark");
-  document.body.style.backgroundImage = `url("/backgroundDark.svg")`;
+  if (window.location.pathname != "/Today/") document.body.style.backgroundImage = `url("/backgroundDark.svg")`;
 }
 const setLightTheme = () => {
   classList.remove("dark");
   localStorage.setItem("theme", "light");
-  document.body.style.backgroundImage = `url("/backgroundLight.svg")`;
+  if (window.location.pathname != "/Today/") document.body.style.backgroundImage = `url("/backgroundLight.svg")`;
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -61,18 +61,12 @@ themeToggleButton!.addEventListener("click", function () {
   lightIconClasses!.toggle("hidden");
 
   if (typeof (localStorage.getItem("theme")) == null) {
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setDarkTheme();
-    } else {
-      setLightTheme();
-    }
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) setDarkTheme();
+    else setLightTheme();
   }
 
-  if (localStorage.getItem("theme") == "light") {
-    setDarkTheme();
-  } else {
-    setLightTheme();
-  }
+  if (localStorage.getItem("theme") == "light") setDarkTheme();
+  else setLightTheme();
 });
 
 const fahrenheitCheckBox = document.getElementById("fahrenheit") as HTMLInputElement;
