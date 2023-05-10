@@ -65,3 +65,20 @@ dialog::backdrop {
     transform: translateY(5%);
   }
 }
+
+#bg {
+  background-size: 200%;
+  animation: animateBg 3s ease infinite;
+}
+
+@keyframes animateBg {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}

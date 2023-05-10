@@ -19,16 +19,19 @@ Copyright © 2022-2023 Open-Meteo.com
 */
 
 import type { Config } from "tailwindcss"
+import defaultTheme from "tailwindcss/defaultTheme"
 
 export default {
   darkMode: "class",
   theme: {
-    fontFamily: {
-      sans: [
-        "Inter", {
-          fontFeatureSettings: '"ss01", "cv05", "ss03"'
-        }
-      ]
+    extend: {
+      fontFamily: {
+        sans: [
+          "Inter", {
+            fontFeatureSettings: '"ss01", "cv05", "ss03"'
+          }, ...defaultTheme.fontFamily.sans
+        ]
+      }
     }
   },
   content: [
@@ -36,10 +39,7 @@ export default {
     "./Today/index.html",
     "./Future/index.html",
     "./Credits/index.html",
-    "./404.html",
-    "./src/*.ts",
-    "./Today/Today.ts",
-    "./Future/Future.ts"
+    "./404.html"
   ],
   plugins: [
     import("flowbite/plugin")
