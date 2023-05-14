@@ -23,7 +23,6 @@ import Chart from "chart.js/auto";
 Chart.defaults.font.family = "Inter";
 Chart.defaults.font.size = 10;
 Chart.defaults.font.weight = "bold";
-Chart.defaults.elements.line.borderWidth = 1;
 Chart.defaults.elements.line.normalized = true;
 Chart.defaults.elements.line.spanGaps = true;
 Chart.defaults.elements.line.tension = 0.4;
@@ -42,7 +41,7 @@ let day1: Chart,
   day6: Chart,
   day7: Chart,
   data: Object;
-const modal = document.getElementById("modal2");
+const modal = document.getElementById("modal2") as HTMLDialogElement;
 
 class WeekChart {
   constructor(id: string, slice: Array<number>) {
@@ -135,7 +134,7 @@ class WeekChart {
       }
     })
   }
-  update(slice: Array<number>) {
+  update(slice: number[]) {
     this.chart.data.datasets[0].label = `Temperature in ${data.hourly_units.temperature_2m}`;
     this.chart.data.datasets[0].data = data.hourly.temperature_2m.slice(slice[0], slice[1]);
     this.chart.data.datasets[1].label = `Relative Humidity in ${data.hourly_units.relativehumidity_2m}`;

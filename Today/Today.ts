@@ -24,7 +24,6 @@ import { Modal } from "flowbite";
 Chart.defaults.font.family = "Inter";
 Chart.defaults.font.size = 10;
 Chart.defaults.font.weight = "bold";
-Chart.defaults.elements.line.borderWidth = 1;
 Chart.defaults.elements.line.normalized = true;
 Chart.defaults.elements.line.spanGaps = true;
 Chart.defaults.elements.line.tension = 0.4;
@@ -33,7 +32,7 @@ Chart.defaults.elements.point.radius = 2.5;
 if (localStorage.getItem("dontever") == null) localStorage.setItem("dontever", "false");
 
 let chart: Chart;
-const modal = document.getElementById("modal2");
+const modal = document.getElementById("modal2") as HTMLDialogElement;
 
 function callCurrentAPI() {
   if (!navigator.geolocation) return
@@ -137,7 +136,7 @@ async function getCurrentWeather(settings: {
   document.body.style.background = `url(${BGImage}) no-repeat center center fixed`;
   document.body.style.backgroundSize = "cover";
 
-  if (!chart) chart = new Chart(
+  if (typeof chart === "undefined" && !chart) chart = new Chart(
     document.getElementById("chart")! as HTMLCanvasElement, {
       type: "line",
       data: {

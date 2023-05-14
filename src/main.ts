@@ -20,33 +20,29 @@ Copyright © 2022-2023 Open-Meteo.com
 
 import "flowbite";
 
-const darkIconClasses = document.getElementById("dark-icon")?.classList;
-const lightIconClasses = document.getElementById("light-icon")?.classList;
-const classList = document.documentElement.classList;;
+const darkIconClasses = document.getElementById("dark-icon")!.classList;
+const lightIconClasses = document.getElementById("light-icon")!.classList;
+const classList = document.documentElement.classList;
 
-if (
-  localStorage.getItem("theme") === "dark" ||
-  (!("theme" in localStorage) &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches)
-) {
-  classList.add("dark");
+if (localStorage.getItem("theme") === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+  classList!.add("dark");
   lightIconClasses!.remove("hidden");
   lightIconClasses!.remove("invisible");
 } else {
-  classList.remove("dark");
+  classList!.remove("dark");
   darkIconClasses!.remove("hidden");
   lightIconClasses!.remove("invisible");
   lightIconClasses!.add("hidden");
 }
 
-const themeToggleButton = document.getElementById("theme-toggle");
+const toggleThemeButton = document.getElementById("theme-toggle") as HTMLButtonElement;
 const setDarkTheme = () => {
-  classList.add("dark");
+  classList!.add("dark");
   localStorage.setItem("theme", "dark");
   if (window.location.pathname != "/Today/") document.body.style.backgroundImage = `url("/backgroundDark.svg")`;
 }
 const setLightTheme = () => {
-  classList.remove("dark");
+  classList!.remove("dark");
   localStorage.setItem("theme", "light");
   if (window.location.pathname != "/Today/") document.body.style.backgroundImage = `url("/backgroundLight.svg")`;
 }
@@ -56,7 +52,7 @@ window.addEventListener('DOMContentLoaded', () => {
   else setLightTheme();
 });
 
-themeToggleButton!.addEventListener("click", function () {
+toggleThemeButton!.addEventListener("click", function () {
   darkIconClasses!.toggle("hidden");
   lightIconClasses!.toggle("hidden");
 
@@ -100,41 +96,40 @@ if (localStorage.getItem("precip")) {
   localStorage.setItem("precip", "inch");
 }
 
-const openButton = document.getElementById("open");
-const closeButtons = Array.from(document.getElementsByClassName("close")) as Array<HTMLElement>;
+const openButton = document.getElementById("open") as HTMLButtonElement;
+const closeButtons = document.getElementsByClassName("close") as HTMLCollectionOf<HTMLButtonElement>;
 const modal = document.getElementById("modal") as HTMLDialogElement;
+const doneButton = document.getElementById("done") as HTMLButtonElement;
 
-openButton?.addEventListener("click", () => {
-  modal?.showModal();
-  modal?.classList.add("show");
-});
+openButton?.addEventListener("click", () => modal?.showModal());
 
-closeButtons.forEach(button => {
+for (const button of closeButtons) {
   button.addEventListener("click", () => {
     if (localStorage.getItem("temp") == "fahrenheit") fahrenheitCheckBox.checked = true;
     else celsiusCheckBox.checked = true;
+
     if (localStorage.getItem("wind") == "mph") mphCheckBox.checked = true;
     else kmhCheckBox.checked = true;
+
     if (localStorage.getItem("precip") == "inch") inchCheckBox.checked = true;
     else mmCheckBox.checked = true;
-    modal?.classList.remove("show");
+
     modal?.close();
   })
-});
+};
 
-document.getElementById("done")?.addEventListener("click", () => {
-  const temperature = <HTMLInputElement>document.querySelector('input[name="temp"]:checked');
-  if (typeof(temperature) != "undefined") localStorage.setItem("temp", temperature.value);
+doneButton?.addEventListener("click", () => {
+  const temperatureBoxChecked = <HTMLInputElement>document.querySelector('input[name="temp"]:checked');
+  if (typeof temperatureBoxChecked !== "undefined" && temperatureBoxChecked) localStorage.setItem("temp", temperatureBoxChecked.value);
   else localStorage.setItem("temp", "fahrenheit");
 
-  const windspeed = <HTMLInputElement>document.querySelector('input[name="wind"]:checked');
-  if (typeof(windspeed) != "undefined") localStorage.setItem("wind", windspeed.value);
+  const windSpeedBoxChecked = <HTMLInputElement>document.querySelector('input[name="wind"]:checked');
+  if (typeof windSpeedBoxChecked !== "undefined" && windSpeedBoxChecked) localStorage.setItem("wind", windSpeedBoxChecked.value);
   else localStorage.setItem("wind", "mph");
 
-  const precipitation = <HTMLInputElement>document.querySelector('input[name="precip"]:checked');
-  if (typeof(precipitation) != "undefined") localStorage.setItem("precip", precipitation.value);
+  const precipitationBoxChecked = <HTMLInputElement>document.querySelector('input[name="precip"]:checked');
+  if (typeof precipitationBoxChecked !== "undefined" && precipitationBoxChecked) localStorage.setItem("precip", precipitationBoxChecked.value);
   else localStorage.setItem("precip", "inch");
 
-  modal?.classList.remove("show");
   modal?.close();
 });
