@@ -23,20 +23,16 @@ Copyright © 2022-2023 Open-Meteo.com
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": [
-      "ESNext",
-      "DOM",
-      "dom.Iterable"
-    ],
-    "moduleResolution": "Node",
-    "strict": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "esModuleInterop": true,
     "noEmit": true,
+    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "types": ["vite/client"]
   },
   "include": ["src/main.ts", "Week/Week.ts", "Current/Curent.ts"]

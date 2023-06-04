@@ -28,8 +28,6 @@ Chart.defaults.elements.line.spanGaps = true;
 Chart.defaults.elements.line.tension = 0.4;
 Chart.defaults.elements.point.radius = 2.5;
 
-if (localStorage.getItem("dontever") == null) localStorage.setItem("dontever", "false");
-
 const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const dayOfWeek = (new Date).getDay();
 
@@ -157,14 +155,13 @@ class WeekChart {
 
 function callWeekAPI() {
   if (!navigator.geolocation) return
-  if (localStorage.getItem("dontever") == "false") modal.showModal();
   navigator.geolocation.getCurrentPosition(pos => {
     getWeekWeather({
       temperatureUnit: localStorage.getItem("temp")!,
       windSpeedUnit: localStorage.getItem("wind")!,
       precipitationUnit: localStorage.getItem("precip")!,
     }, pos.coords.latitude, pos.coords.longitude);
-  });
+  }, showError);
 }
 
 callWeekAPI();
@@ -223,9 +220,30 @@ async function getWeekWeather(settings: {
   document.getElementById("footer")?.classList.remove("absolute");
 }
 
-document.getElementById("done")?.addEventListener("click", () => callWeekAPI());
-const closeButtons = Array.from(document.getElementsByClassName("close")) as Array<HTMLElement>;
-closeButtons.forEach(button => button.addEventListener("click", () => modal.close()));
-document.getElementById("done2")?.addEventListener("click", () => {
-  localStorage.setItem("dontever", "true");
-});
+function showError(error) {
+  let errorCode = "";
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      errorCode = "The location request was denied, please enable location access."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      errorCode = "Geolocation is unavailable, try updating your browser."
+      break;
+    case error.TIMEOUT:
+      errorCode = "The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      errorCode = "An unknown error occurred."
+      break;
+  }
+
+  document.getElementById("errorText")!.innerHTML = errorCode;
+  document.getElementById("loader")?.classList.add("hidden");
+  modal.showModal();
+}
+
+document.getElementById("done")?.addEventListener("click", callWeekAPI);
+const closeButtons = document.getElementsByClassName("close") as HTMLButtonElement[];
+for (const button of closeButtons) {
+  button.addEventListener("click", () => modal.close());
+}

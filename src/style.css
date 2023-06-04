@@ -18,17 +18,7 @@ along with MeteoWeather. If not, see
 Copyright © 2022-2023 Open-Meteo.com
 */
 
-@font-face {
-  font-family: "Inter";
-  font-weight: 100 900;
-  font-display: swap;
-  font-style: normal;
-  src: url("/Inter.woff2") format("woff2"),
-    url("/Inter.woff2") format("woff2-variations"),
-    url("/Inter.woff2") format("woff2 supports variations"),
-    url("/Inter.woff2") format("woff2") tech("variations");
-  unicode-range: 0020—007F;
-}
+@import "./Inter.css";
 
 @tailwind base;
 @tailwind components;
@@ -49,6 +39,15 @@ Copyright © 2022-2023 Open-Meteo.com
   }
   #texts {
     align-items: center;
+  }
+  #buttonGroup {
+    flex-dirrection: column;
+  }
+}
+
+@media (min-width: 379px) {
+  #svgIcon {
+    display: block;
   }
 }
 
