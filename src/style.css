@@ -18,7 +18,17 @@ along with MeteoWeather. If not, see
 Copyright © 2022-2023 Open-Meteo.com
 */
 
-@import "./Inter.css";
+@font-face {
+  font-display: swap;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("/Inter.woff2") format("woff2"),
+    url("/Inter.woff2") format("woff2-variations"),
+    url("/Inter.woff2") format("woff2 supports variations"),
+    url("/Inter.woff2") format("woff2") tech("variations");
+  unicode-range: 0020—007F;
+}
 
 @tailwind base;
 @tailwind components;

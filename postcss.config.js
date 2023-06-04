@@ -18,16 +18,16 @@ along with MeteoWeather. If not, see
 Copyright © 2022-2023 Open-Meteo.com
 */
 
+import autoprefixer from "autoprefixer";
+
 export default {
   plugins: {
     tailwindcss: {},
     cssnano: {
       preset: "advanced",
+      plugins: [autoprefixer],
       discardComments: {
         removeAll: true
-      },
-      autoprefixer: {
-        add: true
       }
     }
   }

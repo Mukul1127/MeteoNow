@@ -1,3 +1,3 @@
-## MetroWeather
+## MeteoWeather
 
-A School Project Of Mine.
+An Random Weather App.

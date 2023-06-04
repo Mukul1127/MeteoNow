@@ -13,6 +13,9 @@ dependencies:
     version: 1.6.5
 
 devDependencies:
+  autoprefixer:
+    specifier: ^10.4.14
+    version: 10.4.14(postcss@8.4.24)
   cssnano:
     specifier: ^6.0.1
     version: 6.0.1(postcss@8.4.24)
