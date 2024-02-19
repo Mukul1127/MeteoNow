@@ -1,18 +1,18 @@
 ---
-import Layout from "@layouts/Layout.astro"
-import Nav from "@components/Nav.astro"
-import Footer from "@components/Footer.astro"
+import Layout from "/src/layouts/Layout.astro"
+import Nav from "/src/components/Nav.astro"
+import Footer from "/src/components/Footer.astro"
 
 import { Picture } from "astro:assets"
 
-import Clear from "@assets/Clear.webp"
+import Clear from "/src/assets/Clear.webp"
 ---
 
 <Layout title="Current Weather">
 	<Nav />
 	<main class="absolute w-screen h-screen grid place-items-center">
 		<div class="flex flex-col items-center rounded-lg shadow">
-			<Picture src={ Clear } alt="Weather Image" class="object-cover w-full md:w-1/2 h-1/2 md:h-full" />
+			<Picture src={ Clear } alt="Current Weather" loading="eager" class="object-cover w-full md:w-1/2 h-1/2 md:h-full" />
 			<div class="flex flex-col justify-between p-4 leading-normal">
 				<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">PlaceHolder</h5>
 				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">PlaceHolder</p>

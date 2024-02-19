@@ -1,11 +1,3 @@
 {
-  "extends": "astro/tsconfigs/strictest",
-  "compilerOptions": {
-    "baseUrl": "C:/Users/mukul/Documents/Projects/Personal/WebApps/MeteoWeather",
-    "paths": {
-      "@*": [
-        "src/*"
-      ]
-    }
-  }
+  "extends": "astro/tsconfigs/strictest"
 }
