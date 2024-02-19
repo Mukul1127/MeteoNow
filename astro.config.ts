@@ -8,7 +8,7 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src")
+        "@": new URL("./src", import.meta.url).toString()
       }
     }
   }
