@@ -1,0 +1,18 @@
+---
+import Layout from "@layouts/Layout.astro"
+---
+
+<Layout title="404 Not Found">
+  <main class="h-screen grid place-items-center">
+    <div class="text-center">
+      <p class="text-base font-semibold text-red-500">404</p>
+      <h1 class="mt-4 text-3xl font-bold tracking-tight sm:text-5xl text-white">Page not found</h1>
+      <p class="mt-6 text-base leading-7 font-semibold text-gray-400 text-pretty">Sorry, we couldn't find the page you're looking for.</p>
+      <div class="mt-10 flex items-center justify-center gap-x-6">
+        <a href="/" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-white hover:bg-red-500 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm focus:ring-offset-gray-800">
+          Go back home
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>

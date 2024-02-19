@@ -1,0 +1,40 @@
+---
+import Layout from "@layouts/Layout.astro"
+import Nav from "@components/Nav.astro"
+import Footer from "@components/Footer.astro"
+---
+
+<Layout title="Homepage">
+	<Nav />
+	<div class="absolute inset-0 grid place-items-center">
+		<div id="bar" class="flex flex-col items-center justify-around bg-gray-700 dark:bg-gray-950 p-4 md:p-8 w-full h-1/2">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-1/2 w-1/2" viewBox="0 0 640 512"><path fill="white" d="M0 336c0 80 65 144 144 144h368a128 128 0 0 0 26-253c4-11 6-23 6-35a96 96 0 0 0-149-80 160 160 0 0 0-299 88C40 220 0 273 0 336z"/></svg>
+			<div id="app" class="h-12"></div>
+		</div>
+	</div>
+	<Footer />
+</Layout>
+
+<script>
+	import Typewriter from "typewriter-effect/dist/core";
+
+	function setup() {
+		const app = document.getElementById("app"),
+			typewriter = new Typewriter(app, {
+				skipAddStyles: true,
+				cursorClassName: "animate-blink"
+			});
+
+		typewriter
+			.pauseFor(1000)
+			.typeString("<span class='text-2xl font-bold text-white'>Welcome to <strong class='bg-clip-text text-transparent font-black bg-gradient-to-br from-pink-400 to-orange-300'>MeteoWeather!</strong></span>")
+			.pauseFor(300)
+			.pasteString("<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
+			.typeString("<span class='text-xs font-bold text-gray-400'>The Powerful Weather App For Your Device</span>")
+			.pauseFor(1000)
+			.start();
+	};
+
+	setup();
+  document.addEventListener("astro:after-swap", setup);
+</script>

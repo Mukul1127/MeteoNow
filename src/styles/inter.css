@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "Inter";
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  src: url("/InterVariable.woff2") format("woff2"),
+       url("/InterVariable.woff2") format("woff2-variations"),
+       url("/InterVariable.woff2") format("woff2 supports variations"),
+       url("/InterVariable.woff2") format("woff2") tech("variations");
+  unicode-range: 0020—007F;
+}

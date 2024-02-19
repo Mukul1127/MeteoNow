@@ -1,0 +1,46 @@
+---
+import { ViewTransitions } from "astro:transitions"
+
+import favicon from "@assets/favicon.svg"
+
+import "@styles/inter.css"
+
+const { title } = Astro.props
+
+import NewLookModal from "@components/NewLookModal.astro"
+import SettingsModal from "@components/SettingsModal.astro"
+import CreditsModal from "@components/CreditsModal.astro"
+---
+
+<html lang="en" class="dark">
+  <head>
+    { /* Metadata */ }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A Astro Weather App">
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href={favicon.src}>
+
+    <title>{`${title} - MeteoWeather`}</title>
+    <ViewTransitions />
+  </head>
+  <body class="bg-white dark:bg-gray-900 antialiased overflow-x-hidden">
+    <slot />
+    <NewLookModal />
+    <SettingsModal />
+    <CreditsModal />
+  </body>
+</html>
+
+<style>
+  * {
+    line-height: 1.5rem;
+
+    color-scheme: dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+
+    /* Why Doesn't Tailwind Do This??? */
+    font-family: Inter, system-ui;
+  }
+</style>
