@@ -14,8 +14,8 @@ import Clear from "@assets/Clear.webp"
 		<div class="flex flex-col items-center rounded-lg shadow">
 			<Picture src={ Clear } alt="Weather Image" class="object-cover w-full md:w-1/2 h-1/2 md:h-full" />
 			<div class="flex flex-col justify-between p-4 leading-normal">
-				<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+				<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">PlaceHolder</h5>
+				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">PlaceHolder</p>
 			</div>
 		</div>
 	</main>
@@ -26,7 +26,6 @@ import Clear from "@assets/Clear.webp"
 	import { fetchWeatherApi } from "openmeteo";
 
 	async function setup() {
-		/*
 		const params = {
 			latitude: localStorage.getItem("lat"),
 			longitude: localStorage.getItem("lon"),
@@ -79,8 +78,6 @@ import Clear from "@assets/Clear.webp"
 		await Promise.all(promises);
 
 		console.table([time, averagedData.temperature_2m, averagedData.apparent_temperature, averagedData.precipitation, averagedData.wind_speed_10m, averagedData.wind_direction_10m]);
-		*/
-		
 	}
 
 	function calculateAverage(arr: number[]) {
