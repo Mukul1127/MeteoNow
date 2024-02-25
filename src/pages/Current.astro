@@ -1,11 +1,29 @@
 ---
-import Layout from "/src/layouts/Layout.astro"
-import Nav from "/src/components/Nav.astro"
-import Footer from "/src/components/Footer.astro"
+/*
+  MeteoWeather is a Accurate Weather App 
+  Copyright (C) 2024 Mukul Kedia
+
+  MeteoWeather is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  MeteoWeather is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with MeteoWeather. If not, see <https://www.gnu.org/licenses/>.
+*/
+
+import Layout from "@/layouts/Layout.astro"
+import Nav from "@/components/Nav.astro"
+import Footer from "@/components/Footer.astro"
 
 import { Picture } from "astro:assets"
 
-import Clear from "/src/assets/Clear.webp"
+import Clear from "@/assets/Clear.webp"
 ---
 
 <Layout title="Current Weather">
@@ -23,6 +41,7 @@ import Clear from "/src/assets/Clear.webp"
 </Layout>
 
 <script>
+	/*
 	import { fetchWeatherApi } from "openmeteo";
 
 	async function setup() {
@@ -60,18 +79,20 @@ import Clear from "/src/assets/Clear.webp"
 		const responses = await fetchWeatherApi(url, params);
 
 		let time;
-		const averagedData: Record<string, number> = {};
+		const averagedData: Record<string, Record<string, number>> = {};
 
 		const promises = responses.map(async (response) => {
 			const utcOffsetSeconds = response.utcOffsetSeconds();
 			const hourly = await response.hourly()!;
+			const modelName = response.model;
+
 			time = new Date(Number(hourly.time().valueOf()) + utcOffsetSeconds * 1000);
 
 			params.hourly.forEach((paramKey, index) => {
 				const valuesArray = hourly.variables(index)!.valuesArray()!;
 
 				const average = calculateAverage(Array.from(valuesArray));
-				averagedData[paramKey] = average;
+				averagedData[modelName.toString()!]![paramKey] = Math.round(average);
 			});
 		});
 
@@ -88,4 +109,5 @@ import Clear from "/src/assets/Clear.webp"
 	document.addEventListener("astro:after-swap", () => {
 		if (window.location.pathname === "/Current") setup();
 	});
+	*/
 </script>
