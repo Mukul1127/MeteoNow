@@ -16,35 +16,35 @@
   along with MeteoWeather. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import type { Config } from "tailwindcss"
-import defaultTheme from "tailwindcss/defaultTheme"
+import { defineConfig, presetUno } from "unocss"
 
-export default {
-	content: [
-    "./src/**/*.astro"
-  ],
-  darkMode: "class",
-  plugins: [
-    import("flowbite/plugin")
-  ],
+const uno = presetUno();
+
+export default defineConfig({
   theme: {
-    extend: {
-      fontFamily: {
-        sans: [
-          "Inter", {
-            fontFeatureSettings: '"ss01", "cv05", "ss03", "case", "cv06", "cv11"'
-          }, ...defaultTheme.fontFamily.sans
-        ]
-      },
+    fontFamily: {
+      sans: [
+        "Inter", {
+          fontFeatureSettings: '"ss01", "cv05", "ss03", "case", "cv06", "cv11", "liga" 1, "calt" 1',
+        }, uno.theme.fontFamily.sans
+      ]
+    },
+    animation: {
       keyframes: {
-        blink: {
-          "0%, 100%": { opacity: 0 },
-          "50%": { opacity: 1 },
-        }
+        blink: `{
+          0%, 100% { opacity: 0; }
+          50% { opacity: 1; },
+        }`
       },
-      animation: {
-        blink: "blink 1s infinite"
-      }
+      durations: {
+        blink: "1s",
+      },
+      timingFns: {
+        blink: "ease-in-out",
+      },
+      counts: {
+        blink: "infinite",
+      },
     }
   }
-} satisfies Config
+});

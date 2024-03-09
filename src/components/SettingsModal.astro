@@ -140,7 +140,7 @@
 <script>
   function setup() {
     const dialog = document.getElementById("settingsModal") as HTMLDialogElement,
-      closeButtons = document.querySelectorAll("[data-close]"),
+      closeButtons = document.querySelectorAll("[data-close]") as NodeListOf<HTMLButtonElement>,
 
       fahrenheitCheckBox = document.getElementById("fahrenheit") as HTMLInputElement,
       celsiusCheckBox = document.getElementById("celsius") as HTMLInputElement,
@@ -149,63 +149,62 @@
       inchCheckBox = document.getElementById("inch") as HTMLInputElement,
       mmCheckBox = document.getElementById("mm") as HTMLInputElement,
 
-      detectButton = document.getElementById("detect")!,
+      detectButton = document.getElementById("detect") as HTMLButtonElement,
       lat = document.getElementById("lat") as HTMLInputElement,
       lon = document.getElementById("lon") as HTMLInputElement;
 
     for (const button of closeButtons) {
       button.addEventListener("click", () => {
-      const keyFrame = new KeyframeEffect(
-        dialog, 
-        [{ translate: "0 5%"}], 
-        { duration: 100, easing: "ease", direction: "normal" }
-      ),
-        animation = new Animation(keyFrame, document.timeline);
+        const keyFrame = new KeyframeEffect(
+          dialog, 
+          [{ translate: "0 5%"}], 
+          { duration: 100, easing: "ease", direction: "normal" }
+        ), animation = new Animation(keyFrame, document.timeline);
 
-      animation.play();
-      animation.onfinish = () => dialog.close();
+        animation.play();
+        animation.onfinish = () => dialog.close();
 
-        // Set Buttons after Modal closed
-        setTimeout(() => {
-          if (localStorage.getItem("temp")) {
-            if (localStorage.getItem("temp") === "fahrenheit") fahrenheitCheckBox.checked = true;
-            else celsiusCheckBox.checked = true;
-          } else {
-            fahrenheitCheckBox.checked = true;
-            localStorage.setItem("temp", "fahrenheit");
-          };
+          // Set Buttons after Modal closed
+          setTimeout(() => {
+            if (localStorage.getItem("temp")) {
+              if (localStorage.getItem("temp") === "fahrenheit") fahrenheitCheckBox.checked = true;
+              else celsiusCheckBox.checked = true;
+            } else {
+              fahrenheitCheckBox.checked = true;
+              localStorage.setItem("temp", "fahrenheit");
+            };
 
-          if (localStorage.getItem("wind")) {
-            if (localStorage.getItem("wind") === "mph") mphCheckBox.checked = true;
-            else kmhCheckBox.checked = true;
-          } else {
-            mphCheckBox.checked = true;
-            localStorage.setItem("wind", "mph");
-          };
+            if (localStorage.getItem("wind")) {
+              if (localStorage.getItem("wind") === "mph") mphCheckBox.checked = true;
+              else kmhCheckBox.checked = true;
+            } else {
+              mphCheckBox.checked = true;
+              localStorage.setItem("wind", "mph");
+            };
 
-          if (localStorage.getItem("precip")) {
-            if (localStorage.getItem("precip") === "inch") inchCheckBox.checked = true;
-            else mmCheckBox.checked = true;
-          } else {
-            inchCheckBox.checked = true;
-            localStorage.setItem("precip", "inch");
-          };
+            if (localStorage.getItem("precip")) {
+              if (localStorage.getItem("precip") === "inch") inchCheckBox.checked = true;
+              else mmCheckBox.checked = true;
+            } else {
+              inchCheckBox.checked = true;
+              localStorage.setItem("precip", "inch");
+            };
 
-          if ("lat" in localStorage) lat.value = localStorage.getItem("lat")!;
-          if ("lon" in localStorage) lon.value = localStorage.getItem("lon")!;
-        }, 150)
+            if ("lat" in localStorage) lat.value = localStorage.getItem("lat")!;
+            if ("lon" in localStorage) lon.value = localStorage.getItem("lon")!;
+          }, 150
+        )
       });
     };
 
-    const saveButton = document.querySelector("[data-save]")!;
+    const saveButton = document.querySelector("[data-save]")! as HTMLButtonElement;
 
     saveButton.addEventListener("click", () => {
       const keyFrame = new KeyframeEffect(
         dialog, 
         [{ translate: "0 5%"}], 
         { duration: 100, easing: "ease", direction: "normal" }
-      ),
-        animation = new Animation(keyFrame, document.timeline);
+      ), animation = new Animation(keyFrame, document.timeline);
 
       animation.play();
       animation.onfinish = () => dialog.close();

@@ -17,17 +17,19 @@
   along with MeteoWeather. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { ViewTransitions } from "astro:transitions"
+const { title } = Astro.props;
 
-import "@/styles/inter.css"
+import { ViewTransitions } from "astro:transitions";
 
-import favicon from "@/assets/favicon.svg"
+import "@/styles/inter.css";
 
-const { title } = Astro.props
+import favicon from "@/assets/favicon.svg";
 
-import NewLookModal from "@/components/NewLookModal.astro"
-import SettingsModal from "@/components/SettingsModal.astro"
-import CreditsModal from "@/components/CreditsModal.astro"
+import NewLookModal from "@/components/NewLookModal.astro";
+import SettingsModal from "@/components/SettingsModal.astro";
+import CreditsModal from "@/components/CreditsModal.astro";
+
+import "@unocss/reset/tailwind.css";
 ---
 
 <html lang="en" class="dark">
@@ -42,7 +44,7 @@ import CreditsModal from "@/components/CreditsModal.astro"
     <title>{`${title} - MeteoWeather`}</title>
     <ViewTransitions />
   </head>
-  <body class="bg-white dark:bg-gray-900 antialiased overflow-x-hidden">
+  <body class="bg-white dark:bg-gray-900 antialiased overflow-x-hidden transition-all">
     <slot />
     <NewLookModal />
     <SettingsModal />

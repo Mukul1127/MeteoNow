@@ -82,7 +82,7 @@
   function setup() {
     const dialog = document.getElementById("creditsModal") as HTMLDialogElement;
 
-    const closeButtons = document.querySelectorAll("[data-close]");
+    const closeButtons = document.querySelectorAll("[data-close]") as NodeListOf<HTMLButtonElement>;
 
     for (const button of closeButtons) {
       button.addEventListener("click", () => {

@@ -17,10 +17,19 @@
 */
 
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
+import UnoCSS from "unocss/astro";
+import Biome from "astro-biome";
 import compress from "astro-compress";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), compress()]
+  integrations: [UnoCSS(), Biome(), compress()],
+  vite: {
+    css: {
+      transformer: "lightningcss"
+    },
+    build: {
+      cssMinify: "lightningcss"
+    }
+  }
 });

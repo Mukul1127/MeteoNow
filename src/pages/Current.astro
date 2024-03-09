@@ -17,23 +17,22 @@
   along with MeteoWeather. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import Layout from "@/layouts/Layout.astro"
-import Nav from "@/components/Nav.astro"
-import Footer from "@/components/Footer.astro"
-
-import { Picture } from "astro:assets"
-
-import Clear from "@/assets/Clear.webp"
+import Layout from "@/layouts/Layout.astro";
+import Nav from "@/components/Nav.astro";
+import Footer from "@/components/Footer.astro";
 ---
 
 <Layout title="Current Weather">
 	<Nav />
 	<main class="absolute w-screen h-screen grid place-items-center">
-		<div class="flex flex-col items-center rounded-lg shadow">
-			<Picture src={ Clear } alt="Current Weather" loading="eager" class="object-cover w-full md:w-1/2 h-1/2 md:h-full" />
-			<div class="flex flex-col justify-between p-4 leading-normal">
-				<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">PlaceHolder</h5>
-				<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">PlaceHolder</p>
+		<div class="p-6 rounded-xl bg-gray-600 dark:bg-gray-950">
+			<h1 class="font-bold text-2xl text-gray-400 dark:text-gray-500">Current Weather</h1>
+			<div class="text-white">
+				<h1><b>Temperature:</b><h1 id="temperature"></h1></h1>
+				<h1><b>Feels Like:</b><h1 id="apparent_temperature"></h1></h1>
+				<h1><b>Precipitation:</b><h1 id="precipitation"></h1></h1>
+				<h1><b>Wind Speed:</b><h1 id="wind_speed"></h1></h1>
+				<h1><b>Wind Direction:</b><h1 id="wind_direction"></h1></h1>
 			</div>
 		</div>
 	</main>
@@ -41,73 +40,94 @@ import Clear from "@/assets/Clear.webp"
 </Layout>
 
 <script>
-	/*
-	import { fetchWeatherApi } from "openmeteo";
+	function convertDirectionToName(degrees: number): string {
+		if (degrees < 22.5 || degrees > 337.5) return "N"
+		if (degrees > 22.5 && degrees < 67.5) return "NE"
+		return ""
+	}
 
-	async function setup() {
+	async function setup(): Promise<void> {
+	/*
 		const params = {
-			latitude: localStorage.getItem("lat"),
-			longitude: localStorage.getItem("lon"),
-			hourly: [
+			latitude: localStorage.getItem("lat")!,
+			longitude: localStorage.getItem("lon")!,
+			temperature_unit: localStorage.getItem("temp")!,
+			wind_speed_unit: localStorage.getItem("wind")!,
+			precipitation_unit: localStorage.getItem("precip")!,
+			current: [
 				"temperature_2m",
 				"apparent_temperature",
+				"weather_code",
 				"precipitation",
 				"wind_speed_10m",
 				"wind_direction_10m"
-			],
-			temperature_unit: localStorage.getItem("temp"),
-			wind_speed_unit: localStorage.getItem("wind"),
-			precipitation_unit: localStorage.getItem("precip"),
-			forecast_days: 1,
-			forecast_hours: 1,
-			models: [
-				"icon_seamless",
-				"icon_global",
-				"icon_eu",
-				"icon_d2",
-				"gfs_seamless",
-				"gfs025",
-				"gfs05",
-				"ecmwf_ifs04",
-				"ecmwf_ifs025",
-				"gem_global",
-				"bom_access_global_ensemble"
-			]
-		};
+			].toString()
+		} as Record<string, string>;
 
-		const url = "https://ensemble-api.open-meteo.com/v1/ensemble";
-		const responses = await fetchWeatherApi(url, params);
+		const url: string = "https://api.open-meteo.com/v1/forecast";
 
-		let time;
-		const averagedData: Record<string, Record<string, number>> = {};
+		const request = new URL(url);
+		request.search = new URLSearchParams(params).toString();
 
-		const promises = responses.map(async (response) => {
-			const utcOffsetSeconds = response.utcOffsetSeconds();
-			const hourly = await response.hourly()!;
-			const modelName = response.model;
+		const response = await fetch(request.toString());
+		const data = await response.json();
+		*/
 
-			time = new Date(Number(hourly.time().valueOf()) + utcOffsetSeconds * 1000);
+		const data = {
+    "latitude": 41.999203,
+    "longitude": -86.50192,
+    "generationtime_ms": 0.11801719665527344,
+    "utc_offset_seconds": 0,
+    "timezone": "GMT",
+    "timezone_abbreviation": "GMT",
+    "elevation": 193,
+    "current_units": {
+        "time": "iso8601",
+        "interval": "seconds",
+        "temperature_2m": "°F",
+        "apparent_temperature": "°F",
+        "weather_code": "wmo code",
+        "precipitation": "inch",
+        "wind_speed_10m": "mp/h",
+        "wind_direction_10m": "°"
+    },
+    "current": {
+        "time": "2024-03-07T22:00",
+        "interval": 900,
+        "temperature_2m": 50.2,
+        "apparent_temperature": 44,
+        "weather_code": 3,
+        "precipitation": 0,
+        "wind_speed_10m": 8.3,
+        "wind_direction_10m": 44
+    }
+}
 
-			params.hourly.forEach((paramKey, index) => {
-				const valuesArray = hourly.variables(index)!.valuesArray()!;
+		document.getElementById("temperature")!.innerText = `${data.current.temperature_2m} ${data.current_units.temperature_2m}`;
 
-				const average = calculateAverage(Array.from(valuesArray));
-				averagedData[modelName.toString()!]![paramKey] = Math.round(average);
-			});
-		});
+		document.getElementById("apparent_temperature")!.innerText = `${data.current.apparent_temperature} ${data.current_units.apparent_temperature}`;
 
-		await Promise.all(promises);
+		if (data.current_units.precipitation === "inch") {
+			if (data.current.precipitation === 1) document.getElementById("precipitation")!.innerText = "1 inch";
+			else document.getElementById("precipitation")!.innerText = `${data.current.precipitation} inches`;
+		}
+		if (data.current_units.precipitation === "mm") {
+			if (data.current.precipitation === 1) document.getElementById("precipitation")!.innerText = "1 millimeter";
+			else document.getElementById("precipitation")!.innerText = `${data.current.precipitation} millimeters`;
+		}
 
-		console.table([time, averagedData.temperature_2m, averagedData.apparent_temperature, averagedData.precipitation, averagedData.wind_speed_10m, averagedData.wind_direction_10m]);
-	}
+		if (data.current_units.wind_speed_10m === "mp/h") {
+			document.getElementById("wind_speed")!.innerText = `${data.current.wind_speed_10m} miles / hour`;
+		}
+		if (data.current_units.wind_speed_10m === "km/h") {
+			document.getElementById("wind_speed")!.innerText = `${data.current.wind_speed_10m} kilometers / hour`;
+		}
 
-	function calculateAverage(arr: number[]) {
-		return arr.reduce((acc, val) => acc + val, 0) / arr.length;
+		document.getElementById("wind_direction")!.innerText = convertDirectionToName(data.current.wind_direction_10m) + data.current.wind_direction_10m;
 	}
 
 	setup();
 	document.addEventListener("astro:after-swap", () => {
 		if (window.location.pathname === "/Current") setup();
 	});
-	*/
 </script>

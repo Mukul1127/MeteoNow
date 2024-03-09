@@ -17,9 +17,9 @@
   along with MeteoWeather. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import Layout from "@/layouts/Layout.astro"
-import Nav from "@/components/Nav.astro"
-import Footer from "@/components/Footer.astro"
+import Layout from "@/layouts/Layout.astro";
+import Nav from "@/components/Nav.astro";
+import Footer from "@/components/Footer.astro";
 ---
 
 <Layout title="Homepage">
@@ -37,7 +37,7 @@ import Footer from "@/components/Footer.astro"
 	import Typewriter from "typewriter-effect/dist/core";
 
 	function setup() {
-		const app = document.getElementById("app"),
+		const app: HTMLElement = document.getElementById("app")!,
 			typewriter = new Typewriter(app, {
 				skipAddStyles: true,
 				cursorClassName: "animate-blink"
