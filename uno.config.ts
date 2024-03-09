@@ -22,6 +22,14 @@ const uno = presetUno();
 
 export default defineConfig({
   theme: {
+    breakpoints: {
+      "xs": "20rem",
+      "sm": "40rem",
+      "md": "48rem",
+      "lg": "64rem",
+      "xl": "80rem",
+      "2xl": "96rem"
+    },
     fontFamily: {
       sans: [
         "Inter", uno.theme.fontFamily.sans
