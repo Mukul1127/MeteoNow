@@ -24,9 +24,7 @@ export default defineConfig({
   theme: {
     fontFamily: {
       sans: [
-        "Inter", {
-          fontFeatureSettings: '"ss01", "cv05", "ss03", "case", "cv06", "cv11", "liga" 1, "calt" 1',
-        }, uno.theme.fontFamily.sans
+        "Inter", uno.theme.fontFamily.sans
       ]
     },
     animation: {
