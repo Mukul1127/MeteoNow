@@ -18,14 +18,16 @@
 
 import { defineConfig } from "astro/config";
 import UnoCSS from "unocss/astro";
-import Biome from "astro-biome";
 import compress from "astro-compress";
+
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://meteoweather.pages.dev",
   integrations: [UnoCSS({
     injectReset: true
-  }), Biome(), compress()],
+  }), sitemap(), compress()],
   vite: {
     css: {
       transformer: "lightningcss"
