@@ -23,7 +23,9 @@ import compress from "astro-compress";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [UnoCSS(), Biome(), compress()],
+  integrations: [UnoCSS({
+    injectReset: true
+  }), Biome(), compress()],
   vite: {
     css: {
       transformer: "lightningcss"
