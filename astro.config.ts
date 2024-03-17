@@ -17,23 +17,12 @@
 */
 
 import { defineConfig } from "astro/config";
-import UnoCSS from "unocss/astro";
 import compress from "astro-compress";
-
 import sitemap from "@astrojs/sitemap";
+import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://meteoweather.pages.dev",
-  integrations: [UnoCSS({
-    injectReset: true
-  }), sitemap(), compress()],
-  vite: {
-    css: {
-      transformer: "lightningcss"
-    },
-    build: {
-      cssMinify: "lightningcss"
-    }
-  }
+  integrations: [tailwind(), sitemap(), compress()]
 });

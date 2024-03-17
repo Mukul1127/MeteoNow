@@ -21,7 +21,7 @@ const { title } = Astro.props;
 
 import { ViewTransitions } from "astro:transitions";
 
-import "@/styles/inter.css";
+import "@/styles/fonts.css";
 
 import favicon from "@/assets/favicon.svg";
 
@@ -42,7 +42,7 @@ import CreditsModal from "@/components/CreditsModal.astro";
     <title>{`${title} - MeteoWeather`}</title>
     <ViewTransitions />
   </head>
-  <body class="bg-white dark:bg-gray-900 antialiased overflow-x-hidden transition-all font-sans">
+  <body class="bg-white dark:bg-gray-900 antialiased overflow-x-hidden transition-all">
     <slot />
     <NewLookModal />
     <SettingsModal />
@@ -58,6 +58,6 @@ import CreditsModal from "@/components/CreditsModal.astro";
     font-synthesis: none;
     text-rendering: optimizeLegibility;
 
-    font-feature-settings: "ss01", "cv05", "ss03", "case", "cv06", "cv11", "liga" 1, "calt" 1;
+    font-feature-settings: "ss01", "cv05", "ss03", "case", "cv06", "cv11", "liga" 1, "calt" 1
   }
 </style>

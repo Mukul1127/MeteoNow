@@ -16,33 +16,32 @@
   along with MeteoWeather. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { defineConfig, presetUno } from "unocss"
+import type { Config } from "tailwindcss"
+import defaultTheme from "tailwindcss/defaultTheme"
 
-const uno = presetUno();
-
-export default defineConfig({
+export default {
+	content: [
+    "./src/**/*.astro"
+  ],
+  darkMode: "class",
   theme: {
-    fontFamily: {
-      sans: [
-        "Inter", uno.theme.fontFamily.sans
-      ]
-    },
-    animation: {
+    extend: {
+      fontFamily: {
+        sans: [ "Inter", ...defaultTheme.fontFamily.sans ],
+        mono: [ "CascadiaCode", ...defaultTheme.fontFamily.mono ]
+      },
       keyframes: {
-        blink: `{
-          0%, 100% { opacity: 0; }
-          50% { opacity: 1; },
-        }`
+        blink: {
+          "0%, 100%": { opacity: 0 },
+          "50%": { opacity: 1 },
+        }
       },
-      durations: {
-        blink: "1s",
+      animation: {
+        blink: "blink 1s infinite"
       },
-      timingFns: {
-        blink: "ease-in-out",
-      },
-      counts: {
-        blink: "infinite",
-      },
+      spacing: {
+        "4.5": "1.10rem",
+      }
     }
   }
-});
+} satisfies Config
