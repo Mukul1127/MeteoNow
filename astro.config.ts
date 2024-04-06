@@ -17,12 +17,14 @@
 */
 
 import { defineConfig } from "astro/config";
-import compress from "astro-compress";
-import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://meteoweather.pages.dev",
-  integrations: [tailwind(), sitemap(), compress()]
+  site: "https://rewrite.meteoweather.pages.dev/",
+  integrations: [
+    (await import("@astrojs/tailwind")).default(),
+    (await import("@astrojs/sitemap")).default(),
+    (await import("@playform/compress")).default(),
+    (await import("@playform/format")).default()
+  ]
 });

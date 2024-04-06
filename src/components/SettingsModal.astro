@@ -18,11 +18,11 @@
 */
 ---
 
-<dialog id="settingsModal" class="z-50 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-gray-900 rounded-lg p-0" aria-labelledby="dialog-aria-label">
-  <header class="flex items-center justify-between p-4 bg-gray-200 dark:bg-gray-900 drop-shadow-lg">
-    <h3 id="dialog-aria-label" class="text-xl font-semibold text-gray-900 dark:text-white">Settings</h3>
+<dialog id="settingsModal" class="z-50 overflow-x-hidden overflow-y-auto bg-gray-700 dark:bg-gray-900 rounded-lg p-0" aria-labelledby="dialog-aria-label">
+  <header class="flex items-center justify-between p-4 bg-gray-700 dark:bg-gray-900 drop-shadow-lg">
+    <h3 id="dialog-aria-label" class="text-xl font-semibold text-white">Settings</h3>
     <div class="w-5"></div>
-    <button aria-label="Close Modal" data-close type="button" class="transition-all motion-reduce:transition-none text-gray-400 bg-transparent hover:bg-gray-300 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+    <button aria-label="Close Modal" data-close type="button" class="active:scale-95 transition-all motion-reduce:transition-none text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-600 hover:text-white">
       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd">
         </path>
@@ -42,6 +42,9 @@
       <button class="flex h-full gap-4 items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" id="detect" type="button">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-4 w-4"><path fill="currentColor" d="M256 0c17.7 0 32 14.3 32 32V66.7C368.4 80.1 431.9 143.6 445.3 224H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H445.3C431.9 368.4 368.4 431.9 288 445.3V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V445.3C143.6 431.9 80.1 368.4 66.7 288H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H66.7C80.1 143.6 143.6 80.1 224 66.7V32c0-17.7 14.3-32 32-32zM128 256a128 128 0 1 0 256 0 128 128 0 1 0 -256 0zm128-80a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/></svg>
       </button>
+    </div>
+    <div id="alert" class="p-4 mb-4 text-sm rounded-lg bg-gray-700 dark:bg-gray-900 text-red-300 dark:text-red-400 font-bold hidden" role="alert">
+      <span class="font-black">Error Code :</span> 
     </div>
     <br />
     <h3 class="text-lg font-medium text-gray-900 dark:text-white">Temperature Units:</h3>
@@ -115,9 +118,9 @@
   { /* Gradient Line */ }
   <div class="h-1 bg-gradient-to-br from-pink-500 to-orange-400"></div>
 
-  <footer class="flex place-content-between p-6 space-x-2 rounded-b bg-gray-200 dark:bg-gray-900">
-    <button type="button" data-close class="hover:brightness-110 transition-all motion-reduce:transition-none shadow-sm shadow-red-400 text-white bg-gradient-to-br from-pink-500 to-orange-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Cancel</button>
-    <button type="button" data-save class="hover:brightness-110 transition-all motion-reduce:transition-none shadow-sm shadow-red-400 text-white bg-gradient-to-br from-pink-500 to-orange-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Save</button>
+  <footer class="flex place-content-between p-6 space-x-2 rounded-b bg-gray-700 dark:bg-gray-900">
+    <button type="button" data-close class="active:scale-95 hover:brightness-110 transition-all motion-reduce:transition-none shadow-sm shadow-red-400 text-white bg-gradient-to-br from-pink-500 to-orange-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Cancel</button>
+    <button type="button" data-save class="active:scale-95 hover:brightness-110 transition-all motion-reduce:transition-none shadow-sm shadow-red-400 text-white bg-gradient-to-br from-pink-500 to-orange-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Save</button>
   </footer>
 </dialog>
 
@@ -151,7 +154,9 @@
 
       detectButton = document.getElementById("detect") as HTMLButtonElement,
       lat = document.getElementById("lat") as HTMLInputElement,
-      lon = document.getElementById("lon") as HTMLInputElement;
+      lon = document.getElementById("lon") as HTMLInputElement,
+
+      alert = document.getElementById("alert") as HTMLElement;
 
     for (const button of closeButtons) {
       button.addEventListener("click", () => {
@@ -262,6 +267,11 @@
       navigator.geolocation.getCurrentPosition((position) => {
         lat.value = position.coords.latitude.toString();
         lon.value = position.coords.longitude.toString();
+
+        if (!(alert.classList.contains("hidden"))) alert.classList.add("hidden")
+      }, error => {
+        if (alert.classList.contains("hidden")) alert.classList.remove("hidden")
+        alert.innerHTML = `<span class="font-black">Error Code ${error.code}:</span> ${error.message}`
       });
     });
   }

@@ -27,17 +27,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: [ "Inter", ...defaultTheme.fontFamily.sans ],
-        mono: [ "CascadiaCode", ...defaultTheme.fontFamily.mono ]
-      },
-      keyframes: {
-        blink: {
-          "0%, 100%": { opacity: 0 },
-          "50%": { opacity: 1 },
-        }
-      },
-      animation: {
-        blink: "blink 1s infinite"
+        sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        mono: ["CascadiaCode", ...defaultTheme.fontFamily.mono]
       },
       spacing: {
         "4.5": "1.10rem",

@@ -40,14 +40,7 @@ import Footer from "@/components/Footer.astro";
 </Layout>
 
 <script>
-	function convertDirectionToName(degrees: number): string {
-		if (degrees < 22.5 || degrees > 337.5) return "N"
-		if (degrees > 22.5 && degrees < 67.5) return "NE"
-		return ""
-	}
-
 	async function setup(): Promise<void> {
-	/*
 		const params = {
 			latitude: localStorage.getItem("lat")!,
 			longitude: localStorage.getItem("lon")!,
@@ -71,37 +64,6 @@ import Footer from "@/components/Footer.astro";
 
 		const response = await fetch(request.toString());
 		const data = await response.json();
-		*/
-
-		const data = {
-    "latitude": 41.999203,
-    "longitude": -86.50192,
-    "generationtime_ms": 0.11801719665527344,
-    "utc_offset_seconds": 0,
-    "timezone": "GMT",
-    "timezone_abbreviation": "GMT",
-    "elevation": 193,
-    "current_units": {
-        "time": "iso8601",
-        "interval": "seconds",
-        "temperature_2m": "°F",
-        "apparent_temperature": "°F",
-        "weather_code": "wmo code",
-        "precipitation": "inch",
-        "wind_speed_10m": "mp/h",
-        "wind_direction_10m": "°"
-    },
-    "current": {
-        "time": "2024-03-07T22:00",
-        "interval": 900,
-        "temperature_2m": 50.2,
-        "apparent_temperature": 44,
-        "weather_code": 3,
-        "precipitation": 0,
-        "wind_speed_10m": 8.3,
-        "wind_direction_10m": 44
-    }
-}
 
 		document.getElementById("temperature")!.innerText = `${data.current.temperature_2m} ${data.current_units.temperature_2m}`;
 
@@ -117,13 +79,13 @@ import Footer from "@/components/Footer.astro";
 		}
 
 		if (data.current_units.wind_speed_10m === "mp/h") {
-			document.getElementById("wind_speed")!.innerText = `${data.current.wind_speed_10m} miles / hour`;
+			document.getElementById("wind_speed")!.innerText = `${data.current.wind_speed_10m} MPH`;
 		}
 		if (data.current_units.wind_speed_10m === "km/h") {
-			document.getElementById("wind_speed")!.innerText = `${data.current.wind_speed_10m} kilometers / hour`;
+			document.getElementById("wind_speed")!.innerText = `${data.current.wind_speed_10m} KMH`;
 		}
 
-		document.getElementById("wind_direction")!.innerText = convertDirectionToName(data.current.wind_direction_10m) + data.current.wind_direction_10m;
+		document.getElementById("wind_direction")!.innerText = `${data.current.wind_direction_10m} ${data.current_units.wind_direction_10m}`;
 	}
 
 	setup();
