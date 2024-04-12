@@ -1,2 +1,2 @@
 # MeteoWeather
-A Random Weather App made in Astro
+A Weather App made in Astro by Mukul Kedia

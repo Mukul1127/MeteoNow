@@ -1,6 +1,6 @@
 ---
 /*
-  MeteoWeather is a Accurate Weather App 
+  MeteoWeather is a Weather App 
   Copyright (C) 2024 Mukul Kedia
 
   MeteoWeather is free software: you can redistribute it and/or modify
@@ -26,13 +26,15 @@ import Footer from "@/components/Footer.astro";
 	<Nav />
 	<main class="absolute w-screen h-screen grid place-items-center">
 		<div class="p-6 rounded-xl bg-gray-600 dark:bg-gray-950">
-			<h1 class="font-bold text-2xl text-gray-400 dark:text-gray-500">Current Weather</h1>
-			<div class="text-white">
-				<h1><b>Temperature:</b><h1 id="temperature"></h1></h1>
-				<h1><b>Feels Like:</b><h1 id="apparent_temperature"></h1></h1>
-				<h1><b>Precipitation:</b><h1 id="precipitation"></h1></h1>
-				<h1><b>Wind Speed:</b><h1 id="wind_speed"></h1></h1>
-				<h1><b>Wind Direction:</b><h1 id="wind_direction"></h1></h1>
+			<div id="container" class="text-white space-y-2 animate-pulse">
+				<h1 class="font-bold text-2xl text-gray-400 dark:text-gray-500">Current Weather</h1>
+
+				<div class="bg-gray-200 h-5 rounded-md dark:bg-gray-700 flex gap-2 skeleton"><h1 id="temperature_label" class="font-bold"></h1><h1 id="temperature"></h1></div>
+				<div class="bg-gray-200 h-5 rounded-md dark:bg-gray-700 flex gap-2 skeleton"><h1 id="apparent_temperature_label" class="font-bold"></h1><h1 id="apparent_temperature"></h1></div>
+				<div class="bg-gray-200 h-5 rounded-md dark:bg-gray-700 flex gap-2 skeleton"><h1 id="precipitation_label" class="font-bold"></h1><h1 id="precipitation"></h1></div>
+				<div class="bg-gray-200 h-5 rounded-md dark:bg-gray-700 flex gap-2 skeleton"><h1 id="wind_speed_label" class="font-bold"></h1><h1 id="wind_speed"></h1></div>
+				<div class="bg-gray-200 h-5 rounded-md dark:bg-gray-700 flex gap-2 skeleton"><h1 id="wind_direction_label" class="font-bold"></h1><h1 id="wind_direction"></h1></div>
+				<span id="srMessage" class="sr-only">Loading...</span>
 			</div>
 		</div>
 	</main>
@@ -64,6 +66,26 @@ import Footer from "@/components/Footer.astro";
 
 		const response = await fetch(request.toString());
 		const data = await response.json();
+
+
+
+		document.getElementById("container")!.classList.remove("animate-pulse");
+
+		const skeletonList = document.getElementsByClassName("skeleton");
+
+		for (const element of skeletonList) {
+			element.classList.remove("bg-gray-200", "dark:bg-gray-700", "h-5")
+		}
+
+		document.getElementById("temperature_label")!.innerHTML = "Temperature:"
+		document.getElementById("apparent_temperature_label")!.innerHTML = "Feels Like:"
+		document.getElementById("precipitation_label")!.innerHTML = "Precipitation:"
+		document.getElementById("wind_speed_label")!.innerHTML = "Wind Speed:"
+		document.getElementById("wind_direction_label")!.innerHTML = "Wind Direction:"
+
+		document.getElementById("srMessage")!.innerHTML = "Done Loading!"
+
+
 
 		document.getElementById("temperature")!.innerText = `${data.current.temperature_2m} ${data.current_units.temperature_2m}`;
 
