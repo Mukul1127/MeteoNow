@@ -1,8 +1,7 @@
 GNU Affero General Public License
 =================================
 
-*Version 3, 19 November 2007* *Copyright © 2007 Free Software
-Foundation, Inc. <*\ http://fsf.org/\ *>*
+*Version 3, 19 November 2007 Copyright © 2007 Free Software Foundation, Inc. <http://fsf.org/>*
 
 Everyone is permitted to copy and distribute verbatim copies of this
 license document, but changing it is not allowed.
