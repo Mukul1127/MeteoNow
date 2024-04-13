@@ -1,7 +1,7 @@
 GNU Affero General Public License
 =================================
 
-*Version 3, 19 November 2007 Copyright © 2007 Free Software Foundation, Inc. <http://fsf.org/>*
+*Version 3, 19 November 2007 Copyright © 2007 Free Software Foundation, Inc. <http://fsf.org/>*
 
 Everyone is permitted to copy and distribute verbatim copies of this
 license document, but changing it is not allowed.
@@ -16,7 +16,7 @@ cooperation with the community in the case of network server software.
 The licenses for most software and other practical works are designed to
 take away your freedom to share and change the works. By contrast, our
 General Public Licenses are intended to guarantee your freedom to share
-and change all versions of a program–to make sure it remains free
+and change all versions of a program--to make sure it remains free
 software for all its users.
 
 When we speak of free software, we are referring to freedom, not price.
@@ -31,7 +31,7 @@ two steps: **(1)** assert copyright on the software, and **(2)** offer
 you this License which gives you legal permission to copy, distribute
 and/or modify the software.
 
-A secondary benefit of defending all users’ freedom is that improvements
+A secondary benefit of defending all users' freedom is that improvements
 made in alternate versions of the program, if they receive widespread
 use, become available for other developers to incorporate. Many
 developers of free software are heartened and encouraged by the
@@ -126,7 +126,7 @@ or an object code interpreter used to run it.
 The “Corresponding Source” for a work in object code form means all the
 source code needed to generate, install, and (for an executable work)
 run the object code and to modify the work, including scripts to control
-those activities. However, it does not include the work’s System
+those activities. However, it does not include the work's System
 Libraries, or general-purpose tools or generally available free programs
 which are used unmodified in performing those activities but which are
 not part of the work. For example, Corresponding Source includes
@@ -168,7 +168,7 @@ Conveying under any other circumstances is permitted solely under the
 conditions stated below. Sublicensing is not allowed; section 10 makes
 it unnecessary.
 
-3. Protecting Users’ Legal Rights From Anti-Circumvention Law
+3. Protecting Users' Legal Rights From Anti-Circumvention Law
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 No covered work shall be deemed part of an effective technological
@@ -180,14 +180,14 @@ When you convey a covered work, you waive any legal power to forbid
 circumvention of technological measures to the extent such circumvention
 is effected by exercising rights under this License with respect to the
 covered work, and you disclaim any intention to limit operation or
-modification of the work as a means of enforcing, against the work’s
-users, your or third parties’ legal rights to forbid circumvention of
+modification of the work as a means of enforcing, against the work's
+users, your or third parties' legal rights to forbid circumvention of
 technological measures.
 
 4. Conveying Verbatim Copies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You may convey verbatim copies of the Program’s source code as you
+You may convey verbatim copies of the Program's source code as you
 receive it, in any medium, provided that you conspicuously and
 appropriately publish on each copy an appropriate copyright notice; keep
 intact all notices stating that this License and any non-permissive
@@ -228,7 +228,7 @@ works, which are not by their nature extensions of the covered work, and
 which are not combined with it such as to form a larger program, in or
 on a volume of a storage or distribution medium, is called an
 “aggregate” if the compilation and its resulting copyright are not used
-to limit the access or legal rights of the compilation’s users beyond
+to limit the access or legal rights of the compilation's users beyond
 what the individual works permit. Inclusion of a covered work in an
 aggregate does not cause this License to apply to the other parts of the
 aggregate.
@@ -443,7 +443,7 @@ organization, or substantially all assets of one, or subdividing an
 organization, or merging organizations. If propagation of a covered work
 results from an entity transaction, each party to that transaction who
 receives a copy of the work also receives whatever licenses to the work
-the party’s predecessor in interest had or could give under the previous
+the party's predecessor in interest had or could give under the previous
 paragraph, plus a right to possession of the Corresponding Source of the
 work from the predecessor in interest, if the predecessor has it or can
 get it with reasonable efforts.
@@ -461,9 +461,9 @@ or importing the Program or any portion of it.
 
 A “contributor” is a copyright holder who authorizes use under this
 License of the Program or a work on which the Program is based. The work
-thus licensed is called the contributor’s “contributor version”.
+thus licensed is called the contributor's “contributor version”.
 
-A contributor’s “essential patent claims” are all patent claims owned or
+A contributor's “essential patent claims” are all patent claims owned or
 controlled by the contributor, whether already acquired or hereafter
 acquired, that would be infringed by some manner, permitted by this
 License, of making, using, or selling its contributor version, but do
@@ -473,7 +473,7 @@ definition, “control” includes the right to grant patent sublicenses in
 a manner consistent with the requirements of this License.
 
 Each contributor grants you a non-exclusive, worldwide, royalty-free
-patent license under the contributor’s essential patent claims, to make,
+patent license under the contributor's essential patent claims, to make,
 use, sell, offer for sale, import and otherwise run, modify and
 propagate the contents of its contributor version.
 
@@ -494,7 +494,7 @@ patent license for this particular work, or **(3)** arrange, in a manner
 consistent with the requirements of this License, to extend the patent
 license to downstream recipients. “Knowingly relying” means you have
 actual knowledge that, but for the patent license, your conveying the
-covered work in a country, or your recipient’s use of the covered work
+covered work in a country, or your recipient's use of the covered work
 in a country, would infringe one or more identifiable patents in that
 country that you have reason to believe are valid.
 
@@ -525,7 +525,7 @@ Nothing in this License shall be construed as excluding or limiting any
 implied license or other defenses to infringement that may otherwise be
 available to you under applicable patent law.
 
-12. No Surrender of Others’ Freedom
+12. No Surrender of Others' Freedom
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If conditions are imposed on you (whether by court order, agreement or
@@ -579,7 +579,7 @@ Public License, you may choose any version ever published by the Free
 Software Foundation.
 
 If the Program specifies that a proxy can decide which future versions
-of the GNU Affero General Public License can be used, that proxy’s
+of the GNU Affero General Public License can be used, that proxy's
 public statement of acceptance of a version permanently authorizes you
 to choose that version for the Program.
 
