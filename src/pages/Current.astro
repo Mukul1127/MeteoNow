@@ -178,7 +178,7 @@ import type { GetImageResult } from "astro";
 
 			const ImageSrc = ImagesDict[BGImage!]!.src
 
-			document.body.style.background = `url(${ImageSrc}) no-repeat center center / cover fixed`;
+			document.getElementById("frame")!.style.background = `url(${ImageSrc}) no-repeat center center / cover fixed`;
 
 
 			document.getElementById("temperature")!.innerText = `${data.current.temperature_2m} ${data.current_units.temperature_2m}`;
