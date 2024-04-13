@@ -70,26 +70,25 @@
 
 <script>
   function setup() {
-    const dialog = document.getElementById("newLookModal") as HTMLDialogElement;
+    const newLookdialog = document.getElementById("newLookModal") as HTMLDialogElement;
 
-    if (localStorage.getItem("NewLookModalShown") === "false" || (!("NewLookModalShown" in localStorage))) {
-      dialog.showModal();
-      localStorage.setItem("NewLookModalShown", "true");
-    };
+    if (localStorage.getItem("NewLookModalShown") === "false" || (!("NewLookModalShown" in localStorage))) newLookdialog.showModal();
 
     const closeButtons = document.querySelectorAll("[data-close]") as NodeListOf<HTMLButtonElement>;
 
     for (const button of closeButtons) {
       button.addEventListener("click", () => {
         const keyFrame = new KeyframeEffect(
-          dialog, 
+          newLookdialog, 
           [{ translate: "0 5%"}], 
           { duration: 100, easing: "ease", direction: "normal" }
         );
 
         const animation = new Animation(keyFrame, document.timeline);
         animation.play();
-        animation.onfinish = () => dialog.close();
+        animation.onfinish = () => newLookdialog.close();
+
+        localStorage.setItem("NewLookModalShown", "true");
       });
     };
   };

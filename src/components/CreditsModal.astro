@@ -84,21 +84,21 @@
 
 <script>
   function setup() {
-    const dialog = document.getElementById("creditsModal") as HTMLDialogElement;
+    const creditsdialog = document.getElementById("creditsModal") as HTMLDialogElement;
 
     const closeButtons = document.querySelectorAll("[data-close]") as NodeListOf<HTMLButtonElement>;
 
     for (const button of closeButtons) {
       button.addEventListener("click", () => {
         const keyFrame = new KeyframeEffect(
-          dialog, 
+          creditsdialog, 
           [{ translate: "0 5%"}], 
           { duration: 100, easing: "ease", direction: "normal" }
         );
 
         const animation = new Animation(keyFrame, document.timeline);
         animation.play();
-        animation.onfinish = () => dialog.close();
+        animation.onfinish = () => creditsdialog.close();
       });
     };
   };

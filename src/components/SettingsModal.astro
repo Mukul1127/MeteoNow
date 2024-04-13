@@ -53,67 +53,23 @@
       <span class="font-medium">Loading:</span> Your device may need some time.
     </div>
     <br />
-    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Temperature Units:</h3>
+    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Units:</h3>
     <ul class="grid w-full gap-6 md:grid-cols-2">
       <li>
-        <input type="radio" id="fahrenheit" name="temp" value="fahrenheit" class="hidden peer" required>
-        <label for="fahrenheit" class="inline-flex items-center justify-between w-full -mb-10 p-3 sm:p-5 sm:mb-auto text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-pink-500 peer-checked:to-orange-400 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 peer-checked:shadow-lg peer-checked:hover:brightness-95">
+        <input type="radio" id="imperial" name="units" value="imperial" class="hidden peer" required>
+        <label for="imperial" class="inline-flex items-center justify-between w-full -mb-10 p-3 sm:p-5 sm:mb-auto text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-pink-500 peer-checked:to-orange-400 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 peer-checked:shadow-lg peer-checked:hover:brightness-95">
           <div class="block">
-            <div class="w-full text-lg font-semibold">Fahrenheit</div>
-            <div class="hidden sm:block w-full">The Imperial System</div>
+            <div class="w-full text-lg font-semibold">Imperial</div>
+            <div class="hidden sm:block w-full">Fahrenheit, MPH, and Inches</div>
           </div>
         </label>
       </li>
       <li>
-        <input type="radio" id="celsius" name="temp" value="celsius" class="hidden peer">
-        <label for="celsius" class="inline-flex items-center justify-between w-full -mb-10 p-3 sm:p-5 sm:mb-auto text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-pink-500 peer-checked:to-orange-400 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 peer-checked:shadow-lg peer-checked:hover:brightness-95">
+        <input type="radio" id="metric" name="units" value="metric" class="hidden peer">
+        <label for="metric" class="inline-flex items-center justify-between w-full -mb-10 p-3 sm:p-5 sm:mb-auto text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-pink-500 peer-checked:to-orange-400 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 peer-checked:shadow-lg peer-checked:hover:brightness-95">
           <div class="block">
-            <div class="w-full text-lg font-semibold">Celsius</div>
-            <div class="hidden sm:block w-full">The Metric System</div>
-          </div>
-        </label>
-      </li>
-    </ul>
-    <br />
-    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Windspeed Units:</h3>
-    <ul class="grid w-full gap-6 md:grid-cols-2">
-      <li>
-        <input type="radio" id="mph" name="wind" value="mph" class="hidden peer">
-        <label for="mph" class="inline-flex items-center justify-between w-full -mb-10 p-3 sm:p-5 sm:mb-auto text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-pink-500 peer-checked:to-orange-400 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 peer-checked:shadow-lg peer-checked:hover:brightness-95">
-          <div class="block">
-            <div class="w-full text-lg font-semibold">MPH</div>
-            <div class="hidden sm:block w-full">The Imperial System</div>
-          </div>
-        </label>
-      </li>
-      <li>
-        <input type="radio" id="kmh" name="wind" value="kmh" class="hidden peer" required>
-        <label for="kmh" class="inline-flex items-center justify-between w-full -mb-10 p-3 sm:p-5 sm:mb-auto text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-pink-500 peer-checked:to-orange-400 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 peer-checked:shadow-lg peer-checked:hover:brightness-95">
-          <div class="block">
-            <div class="w-full text-lg font-semibold">KMH</div>
-            <div class="hidden sm:block w-full">The Metric System</div>
-          </div>
-        </label>
-      </li>
-    </ul>
-    <br />
-    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Precipitation Units:</h3>
-    <ul class="grid w-full gap-6 md:grid-cols-2">
-      <li>
-        <input type="radio" id="inch" name="precip" value="inch" class="hidden peer" required>
-        <label for="inch" class="inline-flex items-center justify-between w-full -mb-10 p-3 sm:p-5 sm:mb-auto text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-pink-500 peer-checked:to-orange-400 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 peer-checked:shadow-lg peer-checked:hover:brightness-95">
-          <div class="block">
-            <div class="w-full text-lg font-semibold">Inches</div>
-            <div class="hidden sm:block w-full">The Imperial System</div>
-          </div>
-        </label>
-      </li>
-      <li>
-        <input type="radio" id="mm" name="precip" value="mm" class="hidden peer">
-        <label for="mm" class="inline-flex items-center justify-between w-full -mb-10 p-3 sm:p-5 sm:mb-auto text-black dark:text-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:text-white bg-gradient-to-br peer-checked:from-pink-500 peer-checked:to-orange-400 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 peer-checked:shadow-lg peer-checked:hover:brightness-95">
-          <div class="block">
-            <div class="w-full text-lg font-semibold">Milimetters</div>
-            <div class="hidden sm:block w-full">The Metric System</div>
+            <div class="w-full text-lg font-semibold">Metric</div>
+            <div class="hidden sm:block w-full">Celsius, KMH, and Millimeters</div>
           </div>
         </label>
       </li>
@@ -148,15 +104,12 @@
 
 <script>
   function setup() {
-    const dialog = document.getElementById("settingsModal") as HTMLDialogElement,
+    const settingsdialog = document.getElementById("settingsModal") as HTMLDialogElement,
       closeButtons = document.querySelectorAll("[data-close]") as NodeListOf<HTMLButtonElement>,
+      saveButton = document.querySelector("[data-save]")! as HTMLButtonElement,
 
-      fahrenheitCheckBox = document.getElementById("fahrenheit") as HTMLInputElement,
-      celsiusCheckBox = document.getElementById("celsius") as HTMLInputElement,
-      mphCheckBox = document.getElementById("mph") as HTMLInputElement,
-      kmhCheckBox = document.getElementById("kmh") as HTMLInputElement,
-      inchCheckBox = document.getElementById("inch") as HTMLInputElement,
-      mmCheckBox = document.getElementById("mm") as HTMLInputElement,
+      imperialCheckBox = document.getElementById("imperial") as HTMLInputElement,
+      metricCheckBox = document.getElementById("metric") as HTMLInputElement,
 
       detectButton = document.getElementById("detect") as HTMLButtonElement,
       lat = document.getElementById("lat") as HTMLInputElement,
@@ -169,38 +122,22 @@
     for (const button of closeButtons) {
       button.addEventListener("click", () => {
         const keyFrame = new KeyframeEffect(
-          dialog, 
+          settingsdialog, 
           [{ translate: "0 5%"}], 
           { duration: 100, easing: "ease", direction: "normal" }
         ), animation = new Animation(keyFrame, document.timeline);
 
         animation.play();
-        animation.onfinish = () => dialog.close();
+        animation.onfinish = () => settingsdialog.close();
 
           // Set Buttons after Modal closed
           setTimeout(() => {
-            if (localStorage.getItem("temp")) {
-              if (localStorage.getItem("temp") === "fahrenheit") fahrenheitCheckBox.checked = true;
-              else celsiusCheckBox.checked = true;
+            if (localStorage.getItem("units")) {
+              if (localStorage.getItem("units") === "metric") metricCheckBox.checked = true;
+              else imperialCheckBox.checked = true;
             } else {
-              fahrenheitCheckBox.checked = true;
-              localStorage.setItem("temp", "fahrenheit");
-            };
-
-            if (localStorage.getItem("wind")) {
-              if (localStorage.getItem("wind") === "mph") mphCheckBox.checked = true;
-              else kmhCheckBox.checked = true;
-            } else {
-              mphCheckBox.checked = true;
-              localStorage.setItem("wind", "mph");
-            };
-
-            if (localStorage.getItem("precip")) {
-              if (localStorage.getItem("precip") === "inch") inchCheckBox.checked = true;
-              else mmCheckBox.checked = true;
-            } else {
-              inchCheckBox.checked = true;
-              localStorage.setItem("precip", "inch");
+              imperialCheckBox.checked = true;
+              localStorage.setItem("units", "imperial");
             };
 
             if ("lat" in localStorage) lat.value = localStorage.getItem("lat")!;
@@ -210,68 +147,45 @@
       });
     };
 
-    const saveButton = document.querySelector("[data-save]")! as HTMLButtonElement;
-
     saveButton.addEventListener("click", () => {
       const keyFrame = new KeyframeEffect(
-        dialog, 
+        settingsdialog, 
         [{ translate: "0 5%"}], 
         { duration: 100, easing: "ease", direction: "normal" }
       ), animation = new Animation(keyFrame, document.timeline);
 
       animation.play();
-      animation.onfinish = () => dialog.close();
+      animation.onfinish = () => settingsdialog.close();
 
       // Set LocalStorage
-      const temperatureBoxChecked = document.querySelector("input[name='temp']:checked") as HTMLInputElement,
-        windSpeedBoxChecked = document.querySelector("input[name='wind']:checked") as HTMLInputElement,
-        precipitationBoxChecked = document.querySelector("input[name='precip']:checked") as HTMLInputElement;
+      const unitsBoxChecked = document.querySelector("input[name='units']:checked") as HTMLInputElement;
 
-      if (typeof temperatureBoxChecked !== "undefined" && temperatureBoxChecked) localStorage.setItem("temp", temperatureBoxChecked.value);
-      else localStorage.setItem("temp", "fahrenheit");
-
-      if (typeof windSpeedBoxChecked !== "undefined" && windSpeedBoxChecked) localStorage.setItem("wind", windSpeedBoxChecked.value);
-      else localStorage.setItem("wind", "mph");
-
-      if (typeof precipitationBoxChecked !== "undefined" && precipitationBoxChecked) localStorage.setItem("precip", precipitationBoxChecked.value);
-      else localStorage.setItem("precip", "inch");
+      if (typeof unitsBoxChecked !== "undefined" && unitsBoxChecked) localStorage.setItem("units", unitsBoxChecked.value);
+      else localStorage.setItem("units", "imperial");
 
       localStorage.setItem("lat", lat.value);
       localStorage.setItem("lon", lon.value);
 
-      window.location.reload();
+      if (window.location.pathname !== "/") window.location.reload();
     });
 
-    // Set Buttons
-    if (localStorage.getItem("temp")) {
-      if (localStorage.getItem("temp") === "fahrenheit") fahrenheitCheckBox.checked = true;
-      else celsiusCheckBox.checked = true;
+    // Set Button
+    if (localStorage.getItem("units")) {
+      if (localStorage.getItem("units") === "metric") metricCheckBox.checked = true;
+      else imperialCheckBox.checked = true;
     } else {
-      fahrenheitCheckBox.checked = true;
-      localStorage.setItem("temp", "fahrenheit");
+      imperialCheckBox.checked = true;
+      localStorage.setItem("units", "imperial");
     };
 
-    if (localStorage.getItem("wind")) {
-      if (localStorage.getItem("wind") === "mph") mphCheckBox.checked = true;
-      else kmhCheckBox.checked = true;
-    } else {
-      mphCheckBox.checked = true;
-      localStorage.setItem("wind", "mph");
-    };
 
-    if (localStorage.getItem("precip")) {
-      if (localStorage.getItem("precip") === "inch") inchCheckBox.checked = true;
-      else mmCheckBox.checked = true;
-    } else {
-      inchCheckBox.checked = true;
-      localStorage.setItem("precip", "inch");
-    };
+
 
     // Location
     if ("lat" in localStorage) lat.value = localStorage.getItem("lat")!;
     if ("lon" in localStorage) lon.value = localStorage.getItem("lon")!;
 
-    if (!("lat" in localStorage) || !("lon" in localStorage)) dialog.showModal();
+    if (!("lat" in localStorage) || !("lon" in localStorage)) settingsdialog.showModal();
 
     detectButton.addEventListener("click", () => {
       if (loading.classList.contains("hidden")) loading.classList.remove("hidden")

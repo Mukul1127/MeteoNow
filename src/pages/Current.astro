@@ -83,12 +83,24 @@ const Images = {
 import type { GetImageResult } from "astro";
 
 	async function setup(): Promise<void> {
+		let temp, wind, precip;
+
+		if (localStorage.getItem("units") === "metric") {
+			temp = "celsius";
+			wind = "kmh";
+			precip = "mm";
+		} else {
+			temp = "fahrenheit";
+			wind = "mph";
+			precip = "inch";
+		}
+
 		const params = {
 			latitude: localStorage.getItem("lat")!,
 			longitude: localStorage.getItem("lon")!,
-			temperature_unit: localStorage.getItem("temp")!,
-			wind_speed_unit: localStorage.getItem("wind")!,
-			precipitation_unit: localStorage.getItem("precip")!,
+			temperature_unit: temp,
+			wind_speed_unit: wind,
+			precipitation_unit: precip,
 			current: [
 				"temperature_2m",
 				"apparent_temperature",
