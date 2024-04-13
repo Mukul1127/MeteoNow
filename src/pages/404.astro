@@ -21,7 +21,7 @@ import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout title="404 Not Found">
-  <main class="h-screen grid place-items-center">
+  <main class="h-screen grid place-items-center bg-gray-700 dark:bg-gray-950">
     <div class="text-center">
       <p class="text-base font-semibold text-red-500">404</p>
       <h1 class="mt-4 text-3xl font-bold tracking-tight sm:text-5xl text-white">Page not found</h1>
@@ -34,3 +34,21 @@ import Layout from "@/layouts/Layout.astro";
     </div>
   </main>
 </Layout>
+
+<script>
+  function setup() {
+    const docList = document.documentElement.classList;
+
+    // Theme
+    if (localStorage.getItem("theme") === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      docList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      docList.remove("dark");
+      localStorage.setItem("theme", "light");
+    };
+  };
+
+  setup();
+  document.addEventListener("astro:after-swap", setup);
+</script>

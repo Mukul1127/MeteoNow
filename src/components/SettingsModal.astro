@@ -44,7 +44,13 @@
       </button>
     </div>
     <div id="alert" class="p-4 mb-4 text-sm rounded-lg bg-gray-700 dark:bg-gray-900 text-red-300 dark:text-red-400 font-bold hidden" role="alert">
-      <span class="font-black">Error Code :</span> 
+      <span class="font-black">Error Code:</span> 
+    </div>
+    <div id="success" class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-gray-700 dark:bg-gray-900 dark:text-green-400 hidden" role="alert">
+      <span class="font-medium">Success:</span> Location succesfully triangulated.
+    </div>
+    <div id="loading" class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-gray-700 dark:bg-gray-900 dark:text-yellow-400 hidden" role="alert">
+      <span class="font-medium">Loading:</span> Your device may need some time.
     </div>
     <br />
     <h3 class="text-lg font-medium text-gray-900 dark:text-white">Temperature Units:</h3>
@@ -156,7 +162,9 @@
       lat = document.getElementById("lat") as HTMLInputElement,
       lon = document.getElementById("lon") as HTMLInputElement,
 
-      alert = document.getElementById("alert") as HTMLElement;
+      alert = document.getElementById("alert") as HTMLElement,
+      loading = document.getElementById("loading")! as HTMLElement,
+      success = document.getElementById("success")! as HTMLElement;
 
     for (const button of closeButtons) {
       button.addEventListener("click", () => {
@@ -230,6 +238,8 @@
 
       localStorage.setItem("lat", lat.value);
       localStorage.setItem("lon", lon.value);
+
+      window.location.reload();
     });
 
     // Set Buttons
@@ -264,14 +274,34 @@
     if (!("lat" in localStorage) || !("lon" in localStorage)) dialog.showModal();
 
     detectButton.addEventListener("click", () => {
+      if (loading.classList.contains("hidden")) loading.classList.remove("hidden")
+      if (!(success.classList.contains("hidden"))) success.classList.add("hidden")
+
       navigator.geolocation.getCurrentPosition((position) => {
+        if (!(loading.classList.contains("hidden"))) loading.classList.add("hidden")
+        if (success.classList.contains("hidden")) success.classList.remove("hidden")
+
         lat.value = position.coords.latitude.toString();
         lon.value = position.coords.longitude.toString();
 
         if (!(alert.classList.contains("hidden"))) alert.classList.add("hidden")
       }, error => {
         if (alert.classList.contains("hidden")) alert.classList.remove("hidden")
-        alert.innerHTML = `<span class="font-black">Error Code ${error.code}:</span> ${error.message}`
+        if (!(loading.classList.contains("hidden"))) loading.classList.add("hidden")
+
+        let errorCode;
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            errorCode = "The location request was denied, please enable location access."
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorCode = "Geolocation is unavailable, try updating your browser."
+            break;
+          case error.TIMEOUT:
+            errorCode = "The request to get your location timed out."
+            break;
+        }
+        alert.innerHTML = `<span class="font-black">Error Code ${error.code}:</span> ${errorCode}`
       });
     });
   }

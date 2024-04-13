@@ -20,11 +20,48 @@
 import Layout from "@/layouts/Layout.astro";
 import Nav from "@/components/Nav.astro";
 import Footer from "@/components/Footer.astro";
+
+import { getImage } from "astro:assets"
+
+import Clear from "@/assets/Clear.webp";
+import Drizzle from "@/assets/Drizzle.webp";
+import Fog from "@/assets/Fog.webp";
+import FreezingRain from "@/assets/FreezingRain.webp";
+import PartlyCloudy from "@/assets/PartlyCloudy.webp";
+import Rain from "@/assets/Rain.webp";
+import RainShowers from "@/assets/RainShowers.webp";
+import Snow from "@/assets/Snow.webp";
+import SnowShowers from "@/assets/SnowShowers.webp";
+import Thunderstorm from "@/assets/Thunderstorm.webp";
+
+const optimizedClear = await getImage({src: Clear, format: "webp"});
+const optimizedDrizzle = await getImage({src: Drizzle, format: "webp"});
+const optimizedFog = await getImage({src: Fog, format: "webp"});
+const optimizedFreezingRain = await getImage({src: FreezingRain, format: "webp"});
+const optimizedPartlyCloudy = await getImage({src: PartlyCloudy, format: "webp"});
+const optimizedRain = await getImage({src: Rain, format: "webp"});
+const optimizedRainShowers = await getImage({src: RainShowers, format: "webp"});
+const optimizedSnow = await getImage({src: Snow, format: "webp"});
+const optimizedSnowShowers = await getImage({src: SnowShowers, format: "webp"});
+const optimizedThunderstorm = await getImage({src: Thunderstorm, format: "webp"});
+
+const Images = { 
+	"Clear": optimizedClear,
+	"Drizzle": optimizedDrizzle,
+	"Fog": optimizedFog,
+	"FreezingRain": optimizedFreezingRain,
+	"PartlyCloudy": optimizedPartlyCloudy,
+	"Rain": optimizedRain,
+	"RainShowers": optimizedRainShowers,
+	"Snow": optimizedSnow,
+	"SnowShowers": optimizedSnowShowers,
+	"Thunderstorm": optimizedThunderstorm
+}
 ---
 
 <Layout title="Current Weather">
 	<Nav />
-	<main class="absolute w-screen h-screen grid place-items-center">
+	<main id="frame" class="absolute inset-0 -z-10 grid place-items-center" data-images={ JSON.stringify(Images) }>
 		<div class="p-6 rounded-xl bg-gray-600 dark:bg-gray-950">
 			<div id="container" class="text-white space-y-2 animate-pulse">
 				<h1 class="font-bold text-2xl text-gray-400 dark:text-gray-500">Current Weather</h1>
@@ -34,6 +71,7 @@ import Footer from "@/components/Footer.astro";
 				<div class="bg-gray-200 h-5 rounded-md dark:bg-gray-700 flex gap-2 skeleton"><h1 id="precipitation_label" class="font-bold"></h1><h1 id="precipitation"></h1></div>
 				<div class="bg-gray-200 h-5 rounded-md dark:bg-gray-700 flex gap-2 skeleton"><h1 id="wind_speed_label" class="font-bold"></h1><h1 id="wind_speed"></h1></div>
 				<div class="bg-gray-200 h-5 rounded-md dark:bg-gray-700 flex gap-2 skeleton"><h1 id="wind_direction_label" class="font-bold"></h1><h1 id="wind_direction"></h1></div>
+				<canvas width="205" height="205" id="myCanvas">Your browser doesn't support this feature</canvas>
 				<span id="srMessage" class="sr-only">Loading...</span>
 			</div>
 		</div>
@@ -42,6 +80,8 @@ import Footer from "@/components/Footer.astro";
 </Layout>
 
 <script>
+import type { GetImageResult } from "astro";
+
 	async function setup(): Promise<void> {
 		const params = {
 			latitude: localStorage.getItem("lat")!,
@@ -65,49 +105,174 @@ import Footer from "@/components/Footer.astro";
 		request.search = new URLSearchParams(params).toString();
 
 		const response = await fetch(request.toString());
-		const data = await response.json();
+
+		if (response.ok) {
+			const data = await response.json();
+
+			let BGImage;
+
+			switch (data.current.weather_code) {
+				case 0: 
+					BGImage = "Clear";
+					break;
+				case 1:
+				case 2:
+				case 3:
+					BGImage = "PartlyCloudy";
+					break;
+				case 45:
+				case 48:
+					BGImage = "Fog";
+					break;
+				case 51:
+				case 53:
+				case 55:
+					BGImage = "Drizzle";
+					break;
+				case 61:
+				case 63:
+				case 65:
+					BGImage = "Rain";
+					break;
+				case 56:
+				case 57:
+				case 66:
+				case 67:
+					BGImage = "FreezingRain";
+					break;
+				case 71:
+				case 73:
+				case 75:
+				case 77:
+					BGImage = "Snow";
+					break;
+				case 80:
+				case 81:
+				case 82:
+					BGImage = "RainShowers";
+					break;
+				case 85:
+				case 86:
+					BGImage = "SnowShowers";
+					break;
+				case 95:
+				case 96:
+				case 99:
+					BGImage = "Thunderstorm";
+					break;
+			}
+
+			const ImagesDict: { [key: string]: GetImageResult } = JSON.parse(document.getElementById("frame")!.dataset.images!);
+
+			const ImageSrc = ImagesDict[BGImage!]!.src
+
+			document.body.style.background = `url(${ImageSrc}) no-repeat center center / cover fixed`;
+
+
+			document.getElementById("temperature")!.innerText = `${data.current.temperature_2m} ${data.current_units.temperature_2m}`;
+
+			document.getElementById("apparent_temperature")!.innerText = `${data.current.apparent_temperature} ${data.current_units.apparent_temperature}`;
+
+			if (data.current_units.precipitation === "inch") {
+				if (data.current.precipitation === 1) document.getElementById("precipitation")!.innerText = "1 inch";
+				else document.getElementById("precipitation")!.innerText = `${data.current.precipitation} inches`;
+			}
+			if (data.current_units.precipitation === "mm") {
+				if (data.current.precipitation === 1) document.getElementById("precipitation")!.innerText = "1 millimeter";
+				else document.getElementById("precipitation")!.innerText = `${data.current.precipitation} millimeters`;
+			}
+
+			if (data.current_units.wind_speed_10m === "mp/h") {
+				document.getElementById("wind_speed")!.innerText = `${data.current.wind_speed_10m} MPH`;
+			}
+			if (data.current_units.wind_speed_10m === "km/h") {
+				document.getElementById("wind_speed")!.innerText = `${data.current.wind_speed_10m} KMH`;
+			}
+
+			document.getElementById("wind_direction")!.innerText = `${data.current.wind_direction_10m} ${data.current_units.wind_direction_10m}`;
+
+			function drawCircleLineArrow(canvas: HTMLCanvasElement, angle: number, radius: number) {
+					const ctx = canvas.getContext("2d")!;
+
+					const centerX = canvas.width / 2;
+					const centerY = canvas.height / 2;
+
+					ctx.beginPath();
+					ctx.arc(centerX, centerY, 80, 0, 2 * Math.PI);
+					ctx.strokeStyle = "white";
+					ctx.lineWidth = 2;
+					ctx.stroke();
+
+    ctx.fillStyle = "white";
+    ctx.font = "bold 16px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("N", centerX, centerY -95);
+    ctx.fillText("NE", centerX + 70, centerY - 70);
+    ctx.fillText("E", centerX + 95, centerY);
+    ctx.fillText("SE", centerX + 70, centerY + 70);
+    ctx.fillText("S", centerX, centerY + 95);
+    ctx.fillText("SW", centerX - 70, centerY + 70);
+    ctx.fillText("W", centerX - 95, centerY);
+    ctx.fillText("NW", centerX - 70, centerY - 70);
+
+					const radians = angle * Math.PI / 180;
+
+					const endX = centerX + radius * Math.cos(radians);
+					const endY = centerY + radius * Math.sin(radians);
+
+					ctx.beginPath();
+					ctx.moveTo(centerX, centerY);
+					ctx.lineTo(endX, endY);
+					ctx.strokeStyle = "white";
+					ctx.lineWidth = 4;
+					ctx.lineCap = "round";
+					ctx.stroke();
+
+					const arrowSize = 15;
+					const arrowAngle = Math.atan2(endY - centerY, endX - centerX);
+
+					const baseX = endX - arrowSize * Math.cos(arrowAngle);
+					const baseY = endY - arrowSize * Math.sin(arrowAngle);
+
+					const point1X = baseX + arrowSize * Math.cos(arrowAngle - Math.PI / 1.5);
+					const point1Y = baseY + arrowSize * Math.sin(arrowAngle - Math.PI / 1.5);
+					const point2X = baseX + arrowSize * Math.cos(arrowAngle + Math.PI / 1.5);
+					const point2Y = baseY + arrowSize * Math.sin(arrowAngle + Math.PI / 1.5);
+
+					ctx.beginPath();
+					ctx.moveTo(endX, endY);
+					ctx.lineTo(point1X, point1Y);
+					ctx.lineTo(point2X, point2Y);
+					ctx.closePath();
+					ctx.stroke();
+
+					// Fill the triangle
+					ctx.fillStyle = "white";
+					ctx.fill();
+			}
+
+			const canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
+			drawCircleLineArrow(canvas, data.current.wind_direction_10m - 90, 75);
 
 
 
-		document.getElementById("container")!.classList.remove("animate-pulse");
+			document.getElementById("container")!.classList.remove("animate-pulse");
 
-		const skeletonList = document.getElementsByClassName("skeleton");
+			const skeletonList = document.getElementsByClassName("skeleton");
 
-		for (const element of skeletonList) {
-			element.classList.remove("bg-gray-200", "dark:bg-gray-700", "h-5")
+			for (const element of skeletonList) {
+				element.classList.remove("bg-gray-200", "dark:bg-gray-700", "h-5")
+			}
+
+			document.getElementById("temperature_label")!.innerHTML = "Temperature:"
+			document.getElementById("apparent_temperature_label")!.innerHTML = "Feels Like:"
+			document.getElementById("precipitation_label")!.innerHTML = "Precipitation:"
+			document.getElementById("wind_speed_label")!.innerHTML = "Wind Speed:"
+			document.getElementById("wind_direction_label")!.innerHTML = "Wind Direction:"
+
+			document.getElementById("srMessage")!.innerHTML = "Done Loading!"
 		}
-
-		document.getElementById("temperature_label")!.innerHTML = "Temperature:"
-		document.getElementById("apparent_temperature_label")!.innerHTML = "Feels Like:"
-		document.getElementById("precipitation_label")!.innerHTML = "Precipitation:"
-		document.getElementById("wind_speed_label")!.innerHTML = "Wind Speed:"
-		document.getElementById("wind_direction_label")!.innerHTML = "Wind Direction:"
-
-		document.getElementById("srMessage")!.innerHTML = "Done Loading!"
-
-
-
-		document.getElementById("temperature")!.innerText = `${data.current.temperature_2m} ${data.current_units.temperature_2m}`;
-
-		document.getElementById("apparent_temperature")!.innerText = `${data.current.apparent_temperature} ${data.current_units.apparent_temperature}`;
-
-		if (data.current_units.precipitation === "inch") {
-			if (data.current.precipitation === 1) document.getElementById("precipitation")!.innerText = "1 inch";
-			else document.getElementById("precipitation")!.innerText = `${data.current.precipitation} inches`;
-		}
-		if (data.current_units.precipitation === "mm") {
-			if (data.current.precipitation === 1) document.getElementById("precipitation")!.innerText = "1 millimeter";
-			else document.getElementById("precipitation")!.innerText = `${data.current.precipitation} millimeters`;
-		}
-
-		if (data.current_units.wind_speed_10m === "mp/h") {
-			document.getElementById("wind_speed")!.innerText = `${data.current.wind_speed_10m} MPH`;
-		}
-		if (data.current_units.wind_speed_10m === "km/h") {
-			document.getElementById("wind_speed")!.innerText = `${data.current.wind_speed_10m} KMH`;
-		}
-
-		document.getElementById("wind_direction")!.innerText = `${data.current.wind_direction_10m} ${data.current_units.wind_direction_10m}`;
 	}
 
 	setup();
