@@ -43,15 +43,9 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-4 w-4"><path fill="currentColor" d="M256 0c17.7 0 32 14.3 32 32V66.7C368.4 80.1 431.9 143.6 445.3 224H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H445.3C431.9 368.4 368.4 431.9 288 445.3V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V445.3C143.6 431.9 80.1 368.4 66.7 288H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H66.7C80.1 143.6 143.6 80.1 224 66.7V32c0-17.7 14.3-32 32-32zM128 256a128 128 0 1 0 256 0 128 128 0 1 0 -256 0zm128-80a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/></svg>
       </button>
     </div>
-    <div id="alert" class="p-4 mb-4 text-sm rounded-lg bg-gray-700 dark:bg-gray-900 text-red-300 dark:text-red-400 font-bold hidden" role="alert">
-      <span class="font-black">Error Code:</span> 
-    </div>
-    <div id="success" class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-gray-700 dark:bg-gray-900 dark:text-green-400 hidden" role="alert">
-      <span class="font-medium">Success:</span> Location succesfully triangulated.
-    </div>
-    <div id="loading" class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-gray-700 dark:bg-gray-900 dark:text-yellow-400 hidden" role="alert">
-      <span class="font-medium">Loading:</span> Your device may need some time.
-    </div>
+    <div id="alert" class="hidden mb-4 rounded-lg bg-gray-700 p-4 text-sm font-semibold text-red-300 dark:bg-gray-900 dark:text-red-400" role="alert"><span class="font-black">Error Code:</span></div>
+    <div id="success" class="hidden mb-4 rounded-lg bg-gray-700 p-4 text-sm font-semibold text-green-300 dark:bg-gray-900 dark:text-green-400" role="alert"><span class="font-black">Success:</span> Location succesfully triangulated.</div>
+    <div id="loading" class="hidden mb-4 rounded-lg bg-gray-700 p-4 text-sm font-semibold text-yellow-100 dark:bg-gray-900 dark:text-yellow-400" role="alert"><span class="font-black">Loading:</span> Your device may need some time.</div>
     <br />
     <h3 class="text-lg font-medium text-gray-900 dark:text-white">Units:</h3>
     <ul class="grid w-full gap-6 md:grid-cols-2">
