@@ -24,5 +24,132 @@ import Footer from "@/components/Footer.astro";
 
 <Layout title="Week's Weather">
 	<Nav />
+  <div id="grids" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 -z-10 p-4 hidden">
+    <div><h1 id="text1" class="text-black dark:text-white text-center text-2xl font-bold"></h1><canvas id="chart1" aria-label="Data Chart" role="img"></canvas></div>
+    <div><h1 id="text2" class="text-black dark:text-white text-center text-2xl font-bold"></h1><canvas id="chart2" aria-label="Data Chart" role="img"></canvas></div>
+    <div><h1 id="text3" class="text-black dark:text-white text-center text-2xl font-bold"></h1><canvas id="chart3" aria-label="Data Chart" role="img"></canvas></div>
+    <div><h1 id="text4" class="text-black dark:text-white text-center text-2xl font-bold"></h1><canvas id="chart4" aria-label="Data Chart" role="img"></canvas></div>
+    <div><h1 id="text5" class="text-black dark:text-white text-center text-2xl font-bold"></h1><canvas id="chart5" aria-label="Data Chart" role="img"></canvas></div>
+    <div><h1 id="text6" class="text-black dark:text-white text-center text-2xl font-bold"></h1><canvas id="chart6" aria-label="Data Chart" role="img"></canvas></div>
+    <div><h1 id="text7" class="text-black dark:text-white text-center text-2xl font-bold"></h1><canvas id="chart7" aria-label="Data Chart" role="img"></canvas></div>
+  </div>
+  <div id="loader" class="grid h-screen w-screen place-items-center place-content-center absolute top-0 -z-20">
+    <div role="status" class="grid place-items-center gap-4">
+      <svg aria-hidden="true" class="w-40 h-40 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+      </svg>
+      <span class="font-bold text-4xl">Loading...</span>
+    </div>
+  </div>
 	<Footer />
 </Layout>
+
+<script>
+  import Chart from "chart.js/auto";
+
+	async function setup() {
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const dayOfWeek = (new Date).getDay();
+
+    Chart.defaults.font.family = "Inter";
+    Chart.defaults.font.size = 10;
+    Chart.defaults.font.weight = "bold";
+    Chart.defaults.elements.line.spanGaps = true;
+    Chart.defaults.elements.point.radius = 2.5;
+
+    class WeekChart {
+      constructor(id: string, slice: Array<number>, data: any) {
+        new Chart(document.getElementById(id)! as HTMLCanvasElement, {
+          type: "line",
+          data: {
+            labels: [
+              "12:00 AM", "1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM", 
+              "6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", 
+              "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", 
+              "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM"
+            ],
+            datasets: [
+              {
+                label: `Temperature in ${data.hourly_units.temperature_2m}`,
+                data: data.hourly.temperature_2m.slice(slice[0],slice[1])
+              },
+              {
+                label: `Feels Like in ${data.hourly_units.apparent_temperature}`,
+                data: data.hourly.apparent_temperature.slice(slice[0],slice[1])
+              },
+              {
+                label: `Precipitation in ${data.hourly_units.precipitation}`,
+                data: data.hourly.precipitation.slice(slice[0],slice[1])
+              }
+            ]
+          },
+          options: { transitions: {
+              show: { animations: { x: { from: 0 }, y: { from: 0 } } },
+              hide: { animations: { x: { to: 0 }, y: { to: 0 } } }
+          } }
+        })
+      }
+    }
+
+		let temp, wind, precip;
+
+		if (localStorage.getItem("units") === "metric") {
+			temp = "celsius";
+			wind = "kmh";
+			precip = "mm";
+		} else {
+			temp = "fahrenheit";
+			wind = "mph";
+			precip = "inch";
+		}
+
+		const params = {
+			latitude: localStorage.getItem("lat")!,
+			longitude: localStorage.getItem("lon")!,
+			temperature_unit: temp,
+			wind_speed_unit: wind,
+			precipitation_unit: precip,
+      hourly: [
+        "temperature_2m",
+        "apparent_temperature",
+        "precipitation"
+      ].toString()
+		} as Record<string, string>;
+
+		const url: string = "https://api.open-meteo.com/v1/forecast";
+
+		const request = new URL(url);
+		request.search = new URLSearchParams(params).toString();
+
+		const response = await fetch(request.toString());
+
+		if (response.ok) {
+			const data = await response.json();
+
+      document.getElementById("loader")!.classList.add("hidden")
+      document.getElementById("grids")!.classList.remove("hidden")
+
+      new WeekChart("chart1", [0, 24], data);
+      new WeekChart("chart2", [24, 48], data);
+      new WeekChart("chart3", [48, 72], data);
+      new WeekChart("chart4", [72, 96], data);
+      new WeekChart("chart5", [96, 120], data);
+      new WeekChart("chart6", [120, 144], data);
+      new WeekChart("chart7", [144, 168], data);
+
+      document.getElementById("text1")!.innerHTML = `Today (${daysOfWeek[dayOfWeek]})`;
+      document.getElementById("text2")!.innerHTML = `Tomorrow (${daysOfWeek[(dayOfWeek + 1) % 7]})`;
+      document.getElementById("text3")!.innerHTML = daysOfWeek[(dayOfWeek + 2) % 7]!;
+      document.getElementById("text4")!.innerHTML = daysOfWeek[(dayOfWeek + 3) % 7]!;
+      document.getElementById("text5")!.innerHTML = daysOfWeek[(dayOfWeek + 4) % 7]!;
+      document.getElementById("text6")!.innerHTML = daysOfWeek[(dayOfWeek + 5) % 7]!;
+      document.getElementById("text7")!.innerHTML = daysOfWeek[(dayOfWeek + 6) % 7]!;
+		}
+	}
+
+	setup();
+	document.addEventListener("astro:after-swap", () => {
+		if (window.location.pathname === "/Week") setup();
+	});
+</script>

@@ -82,7 +82,7 @@ const Images = {
 <script>
 import type { GetImageResult } from "astro";
 
-	async function setup(): Promise<void> {
+	async function setup() {
 		let temp, wind, precip;
 
 		if (localStorage.getItem("units") === "metric") {
