@@ -24,7 +24,7 @@ import Footer from "@/components/Footer.astro";
 
 <Layout title="Week's Weather">
 	<Nav />
-  <div id="grids" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 -z-10 p-4 hidden">
+  <div id="grids" class="grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 -z-10 p-4 hidden">
     <div><h1 id="text1" class="text-black dark:text-white text-center text-2xl font-bold"></h1><canvas id="chart1" aria-label="Data Chart" role="img"></canvas></div>
     <div><h1 id="text2" class="text-black dark:text-white text-center text-2xl font-bold"></h1><canvas id="chart2" aria-label="Data Chart" role="img"></canvas></div>
     <div><h1 id="text3" class="text-black dark:text-white text-center text-2xl font-bold"></h1><canvas id="chart3" aria-label="Data Chart" role="img"></canvas></div>
@@ -129,6 +129,7 @@ import Footer from "@/components/Footer.astro";
 
       document.getElementById("loader")!.classList.add("hidden")
       document.getElementById("grids")!.classList.remove("hidden")
+      document.getElementById("grids")!.classList.add("grid")
 
       new WeekChart("chart1", [0, 24], data);
       new WeekChart("chart2", [24, 48], data);
