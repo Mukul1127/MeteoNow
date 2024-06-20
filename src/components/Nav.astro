@@ -66,12 +66,9 @@
   </div>
 </nav>
 
-<script>
+<script is:inline>
   function setup() {
-    const docList = document.documentElement.classList,
-      themeButton = document.getElementById("toggleTheme")! as HTMLButtonElement,
-      classList = document.getElementById("list")!.classList,
-      navButton = document.getElementById("toggleNav")! as HTMLButtonElement;
+    const docList = document.documentElement.classList;
 
     // Theme
     if (localStorage.getItem("theme") === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
@@ -81,29 +78,37 @@
       docList.remove("dark");
       localStorage.setItem("theme", "light");
     };
-
-    themeButton.addEventListener("click", () => {
-      if (docList.contains("dark")) {
-        docList.remove("dark")
-        localStorage.setItem("theme", "light")
-      } else {
-        docList.add("dark")
-        localStorage.setItem("theme", "dark")
-      };
-    });
-
-    // Navigation
-    navButton.addEventListener("click", () => {
-      if (classList.contains("hidden")) {
-        classList.remove("hidden")
-        navButton.ariaExpanded = "true"
-      } else {
-        classList.add("hidden")
-        navButton.ariaExpanded = "false"
-      };
-    });
   };
 
   setup();
   document.addEventListener("astro:after-swap", setup);
+</script>
+
+<script>
+  const docList = document.documentElement.classList,
+    themeButton = document.getElementById("toggleTheme")! as HTMLButtonElement,
+    classList = document.getElementById("list")!.classList,
+    navButton = document.getElementById("toggleNav")! as HTMLButtonElement;
+
+  // Theme
+  themeButton.addEventListener("click", () => {
+    if (docList.contains("dark")) {
+      docList.remove("dark")
+      localStorage.setItem("theme", "light")
+    } else {
+      docList.add("dark")
+      localStorage.setItem("theme", "dark")
+    };
+  });
+
+  // Navigation
+  navButton.addEventListener("click", () => {
+    if (classList.contains("hidden")) {
+      classList.remove("hidden")
+      navButton.ariaExpanded = "true"
+    } else {
+      classList.add("hidden")
+      navButton.ariaExpanded = "false"
+    };
+  });
 </script>

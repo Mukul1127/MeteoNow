@@ -16,13 +16,11 @@
   along with MeteoNow. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import type { Config } from "tailwindcss"
-import defaultTheme from "tailwindcss/defaultTheme"
+import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 export default {
-	content: [
-    "./src/**/*.astro"
-  ],
+  content: ["./src/**/*.astro"],
   darkMode: "class",
   theme: {
     extend: {
@@ -31,8 +29,8 @@ export default {
         mono: ["CascadiaCode", ...defaultTheme.fontFamily.mono]
       },
       spacing: {
-        "4.5": "1.10rem",
+        "4.5": "1.10rem"
       }
     }
   }
-} satisfies Config
+} satisfies Config;

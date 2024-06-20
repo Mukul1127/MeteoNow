@@ -17,11 +17,11 @@
   along with MeteoNow. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import Layout from "@/layouts/Layout.astro";
-import Nav from "@/components/Nav.astro";
 import Footer from "@/components/Footer.astro";
+import Nav from "@/components/Nav.astro";
+import Layout from "@/layouts/Layout.astro";
 
-import { getImage } from "astro:assets"
+import { getImage } from "astro:assets";
 
 import Clear from "@/assets/Clear.webp";
 import Drizzle from "@/assets/Drizzle.webp";
@@ -34,29 +34,44 @@ import Snow from "@/assets/Snow.webp";
 import SnowShowers from "@/assets/SnowShowers.webp";
 import Thunderstorm from "@/assets/Thunderstorm.webp";
 
-const optimizedClear = await getImage({src: Clear, format: "webp"});
-const optimizedDrizzle = await getImage({src: Drizzle, format: "webp"});
-const optimizedFog = await getImage({src: Fog, format: "webp"});
-const optimizedFreezingRain = await getImage({src: FreezingRain, format: "webp"});
-const optimizedPartlyCloudy = await getImage({src: PartlyCloudy, format: "webp"});
-const optimizedRain = await getImage({src: Rain, format: "webp"});
-const optimizedRainShowers = await getImage({src: RainShowers, format: "webp"});
-const optimizedSnow = await getImage({src: Snow, format: "webp"});
-const optimizedSnowShowers = await getImage({src: SnowShowers, format: "webp"});
-const optimizedThunderstorm = await getImage({src: Thunderstorm, format: "webp"});
+const optimizedClear = await getImage({ src: Clear, format: "webp" });
+const optimizedDrizzle = await getImage({ src: Drizzle, format: "webp" });
+const optimizedFog = await getImage({ src: Fog, format: "webp" });
+const optimizedFreezingRain = await getImage({
+  src: FreezingRain,
+  format: "webp"
+});
+const optimizedPartlyCloudy = await getImage({
+  src: PartlyCloudy,
+  format: "webp"
+});
+const optimizedRain = await getImage({ src: Rain, format: "webp" });
+const optimizedRainShowers = await getImage({
+  src: RainShowers,
+  format: "webp"
+});
+const optimizedSnow = await getImage({ src: Snow, format: "webp" });
+const optimizedSnowShowers = await getImage({
+  src: SnowShowers,
+  format: "webp"
+});
+const optimizedThunderstorm = await getImage({
+  src: Thunderstorm,
+  format: "webp"
+});
 
-const Images = { 
-	"Clear": optimizedClear,
-	"Drizzle": optimizedDrizzle,
-	"Fog": optimizedFog,
-	"FreezingRain": optimizedFreezingRain,
-	"PartlyCloudy": optimizedPartlyCloudy,
-	"Rain": optimizedRain,
-	"RainShowers": optimizedRainShowers,
-	"Snow": optimizedSnow,
-	"SnowShowers": optimizedSnowShowers,
-	"Thunderstorm": optimizedThunderstorm
-}
+const Images = {
+  Clear: optimizedClear,
+  Drizzle: optimizedDrizzle,
+  Fog: optimizedFog,
+  FreezingRain: optimizedFreezingRain,
+  PartlyCloudy: optimizedPartlyCloudy,
+  Rain: optimizedRain,
+  RainShowers: optimizedRainShowers,
+  Snow: optimizedSnow,
+  SnowShowers: optimizedSnowShowers,
+  Thunderstorm: optimizedThunderstorm
+};
 ---
 
 <Layout title="Current Weather">

@@ -18,20 +18,25 @@
   "version": "2.0.0",
   "license": "AGPL-3.0-only",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "bunx --bun astro dev",
+    "build": "bunx --bun astro build",
+    "preview": "bunx --bun astro preview",
+    "astro": "bunx --bun astro",
+    "check": "bunx --bun @biomejs/biome check . --write --no-errors-on-unmatched --files-ignore-unknown=true",
+    "hook": "bunx --bun lefthook install"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.1.4",
+    "@astrojs/sitemap": "^3.1.6",
     "@astrojs/tailwind": "^5.1.0",
-    "@playform/compress": "^0.0.3",
-    "@playform/format": "^0.0.2",
-    "astro": "^4.6.3",
-    "chart.js": "^4.4.2",
-    "sharp": "^0.33.3",
-    "tailwindcss": "^3.4.3",
+    "@playform/compress": "^0.0.13",
+    "astro": "^4.11.0",
+    "chart.js": "^4.4.3",
+    "sharp": "^0.33.4",
+    "tailwindcss": "^3.4.4",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.2",
+    "lefthook": "^1.6.17"
   }
 }

@@ -20,11 +20,10 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://meteonow.pages.dev/",
+  site: "https://meteonow.mookul.dev/",
   integrations: [
     (await import("@astrojs/tailwind")).default(),
     (await import("@astrojs/sitemap")).default(),
-    (await import("@playform/compress")).default(),
-    (await import("@playform/format")).default()
+    (await import("@playform/compress")).default()
   ]
 });
