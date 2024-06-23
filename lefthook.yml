@@ -1,7 +1,7 @@
 pre-commit:
   commands:
     check:
-      run: bun check && git update-index
+      run: pnpm check && git update-index
 
 skip_output:
   - meta
